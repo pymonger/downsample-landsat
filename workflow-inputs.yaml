@@ -1,0 +1,6 @@
+workflow_input_url: https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF
+workflow_min_spin_time: 15
+workflow_max_spin_time: 30
+workflow_aws_access_key_id: aws_access_key_id
+workflow_aws_secret_access_key: aws_secret_access_key_id
+workflow_base_dataset_url: s3://some_bucket/test
