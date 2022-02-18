@@ -7,7 +7,7 @@ hints:
     dockerPull: 'pymonger/downsample-landsat:latest'
 baseCommand:
   - papermill
-  - /home/jovyan/hello-world/downsample_landsat/downsample_landsat.ipynb
+  - /home/jovyan/downsample_landsat/downsample_landsat.ipynb
   - output_nb.ipynb
 requirements:
   ShellCommandRequirement: {}

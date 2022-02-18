@@ -20,6 +20,6 @@ RUN set -ex \
   && cd downsample-landsat \
   && python -c "import black; black.cache.CACHE_DIR.mkdir(parents=True, exist_ok=True)"
 
-WORKDIR $HOME/hello-world
+WORKDIR $HOME/downsample-landsat
 
 CMD ["/bin/bash"]
