@@ -1,3 +1,5 @@
+#!/usr/bin/env cwltool
+
 cwlVersion: v1.1
 class: CommandLineTool
 $namespaces:

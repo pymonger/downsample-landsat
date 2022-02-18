@@ -1,10 +1,10 @@
-#!/usr/bin/env cwl-runner
+#!/usr/bin/env cwltool
 
 cwlVersion: v1.1
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: 'pymonger/hello-world:stable'
+    dockerPull: 'pymonger/downsample-landsat:latest'
 baseCommand:
   - papermill
   - /home/jovyan/hello-world/downsample_landsat/downsample_landsat.ipynb
@@ -13,6 +13,7 @@ requirements:
   ShellCommandRequirement: {}
   NetworkAccess:
     networkAccess: true
+
 inputs:
   input_url:
     type: string
@@ -38,6 +39,7 @@ inputs:
       prefix: '--parameters'
       valueFrom: |
         max_spin_time "$(self)"
+
 outputs:
   output_nb_file:
     type: File

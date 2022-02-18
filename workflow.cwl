@@ -1,3 +1,5 @@
+#!/usr/bin/env cwltool
+
 cwlVersion: v1.1
 class: Workflow
 $namespaces:
@@ -7,6 +9,7 @@ hints:
     secrets:
       - workflow_aws_access_key_id
       - workflow_aws_secret_access_key
+
 inputs:
   workflow_input_url: string
   workflow_min_spin_time: int
@@ -14,6 +17,7 @@ inputs:
   workflow_aws_access_key_id: string
   workflow_aws_secret_access_key: string
   workflow_base_dataset_url: string
+
 outputs:
   final_dataset_dir:
     type: Directory
@@ -30,7 +34,9 @@ outputs:
   stderr-stage_out:
     type: File
     outputSource: stage_out/stderr_file
+
 steps:
+
   downsample_landsat:
     run: downsample_landsat.cwl
     in:
@@ -42,6 +48,7 @@ steps:
       - dataset_dir
       - stdout_file
       - stderr_file
+
   stage_out:
     run: stage_out.cwl
     in:
