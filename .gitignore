@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# misc
+LC8*_downsampled
+*-stderr.txt
+*-stdout.txt
+output_nb.ipynb
+*.tmp
