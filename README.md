@@ -223,7 +223,7 @@ a CWL workflow.
 
    then edit `workflow-inputs.yml`:
    ```
-   vi workflow-input.yml
+   vi workflow-inputs.yml
    ```
 
    and insert the values for:
