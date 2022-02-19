@@ -11,6 +11,13 @@ Example CWL workflow calling a papermilled notebook.
    ```
 1. Open the `downsample_landsat.ipynb` notebook and run it.
 
+## Building the container image
+```
+git clone https://github.com/pymonger/downsample-landsat.git
+cd downsample-landsat
+docker build --rm --force-rm -t pymonger/downsample-landsat:latest -f Dockerfile .
+```
+
 ## Running cwltool
 
 ### Prerequisites
@@ -400,9 +407,301 @@ DAG workflow.
    2022-02-18 16:34:47       3008 LC80650452017120LGN00_BQA_downsampled.met.json
    ```
 
-## Building Container Image
+## Running calrissian
+
+### Run 2-step workflow (downsample_landsat & stage_out) example on K8s (Kubernetes) via Calrissian
+Now that we've seen the execution of the workflow on a local machine, it's time to execute the
+workflow on a K8s cluster. Once again the following image depicts the graph visualiation (dot) 
+of the DAG workflow.
+
+![workflow](images/workflow.png?raw=true "workflow")
+
+In the previous section, we used `cwltool` to execute the CWL workflow which proceeded to
+spawn 2 containers corresponding to the 2 steps in the workflow. In this example, we submit
+a K8s job to run Calrissian, a CWL-compliant implementation that supports execution of
+workflows and their composite steps as K8s jobs.
+
+1. Clean out any artifacts that were left as a result of running the previous examples:
+   ```
+   rm -rf LC80650452017120LGN00_BQA_downsampled *-stderr.txt *-stdout.txt output_nb.ipynb
+   ```
+1. Create namespace and roles:
+   ```
+   NAMESPACE_NAME=dev
+   kubectl create namespace "$NAMESPACE_NAME"
+   kubectl --namespace="$NAMESPACE_NAME" create role pod-manager-role \
+     --verb=create,patch,delete,list,watch --resource=pods
+   kubectl --namespace="$NAMESPACE_NAME" create role log-reader-role \
+     --verb=get,list --resource=pods/log
+   kubectl --namespace="$NAMESPACE_NAME" create rolebinding pod-manager-default-binding \
+     --role=pod-manager-role --serviceaccount=${NAMESPACE_NAME}:default
+   kubectl --namespace="$NAMESPACE_NAME" create rolebinding log-reader-default-binding \
+     --role=log-reader-role --serviceaccount=${NAMESPACE_NAME}:default
+   ```
+1. Create secret containing AWS creds. Set the following env variables manually:
+   ```
+   export aws_access_key_id="<your AWS access key ID>"
+   export aws_secret_access_key="<your AWS secret access key>"
+   ```
+
+   Then write them to a K8s secret: 
+   ```
+   kubectl --namespace="$NAMESPACE_NAME" create secret generic aws-creds \
+     --from-literal=aws_access_key_id="$aws_access_key_id" \
+     --from-literal=aws_secret_access_key="$aws_secret_access_key"
+   ```
+1. Create volumes (this is the equivalent to creating a unique work directory for the workflow execution job):
+   ```
+   kubectl --namespace="$NAMESPACE_NAME" create -f k8s/VolumeClaims.yaml
+   ```
+
+   If on GKE (Google Kubernetes Engine), see the GKE caveat below to create an
+   NFS server to support `ReadWriteMany` and run this afterwards:
+   ```
+   kubectl --namespace="$NAMESPACE_NAME" create -f k8s/gke/VolumeClaims.yaml
+   ```
+
+   If on EKS (Elastic Kubernetes Service), see the EKS caveat below to create
+   PersistentVolumeClaims backed by EFS (Elastic File Service) to support 
+   `ReadWriteMany` and run this afterwards:
+   ```
+   kubectl --namespace="$NAMESPACE_NAME" create -f k8s/eks/VolumeClaims.yaml
+   ```
+1. Run the workflow:
+   ```
+   kubectl --namespace="$NAMESPACE_NAME" create -f k8s/CalrissianJob.yaml
+   ```
+
+   Monitor execution with:
+   ```
+   while true; do kubectl --namespace="$NAMESPACE_NAME" logs -f job/calrissian-job && break; sleep 2; done
+   ```
+
+   Output should be similar to this:
+   ```
+   INFO calrissian 0.10.0 (cwltool 3.1.20211004060744)                                                               INFO https://raw.githubusercontent.com/pymonger/soamc-cwl-demo/develop/baseline-pge/baseline-pge-workflow.cwl:1:1: Unknown hint
+                                                                                                                 http://commonwl.org/cwltool#Secrets
+   INFO https://raw.githubusercontent.com/pymonger/soamc-cwl-demo/develop/baseline-pge/stage-out.cwl:1:1: Unknown hint
+                                                                                                     http://commonwl.org/cwltool#Secrets
+   INFO [workflow ] starting step stage-in
+   INFO [step stage-in] start
+   INFO [workflow ] start
+   INFO [step stage-in] completed success
+   INFO [workflow ] starting step run-pge
+   INFO [step run-pge] start
+   INFO [step run-pge] completed success
+   INFO [workflow ] starting step stage-out
+   INFO [step stage-out] start
+   INFO [step stage-out] completed success
+   INFO [workflow ] completed success
+   {
+       "final_dataset_dir": {
+           "location": "file:///calrissian/output-data/dumby-product-20210622191038567000",
+           "basename": "dumby-product-20210622191038567000",
+           "class": "Directory",
+           "listing": [
+               {
+                   "class": "File",
+                   "location": "file:///calrissian/output-data/dumby-product-20210622191038567000/dumby-product-20210622191038567000.browse.png",
+                   "basename": "dumby-product-20210622191038567000.browse.png",
+                   "checksum": "sha1$5cd47ad8f2cd2f7f4d8bc8df02dfb06a57b74914",
+                   "size": 2477207,
+                   "path": "/calrissian/output-data/dumby-product-20210622191038567000/dumby-product-20210622191038567000.browse.png"
+               },
+               {
+                   "class": "File",
+                   "location": "file:///calrissian/output-data/dumby-product-20210622191038567000/dumby-product-20210622191038567000.browse_small.png",
+                   "basename": "dumby-product-20210622191038567000.browse_small.png",
+                   "checksum": "sha1$8230dd45fdeb8a376840c9edd9b064e8625090fc",
+                   "size": 80019,
+                   "path": "/calrissian/output-data/dumby-product-20210622191038567000/dumby-product-20210622191038567000.browse_small.png"
+               },
+               {
+                   "class": "File",
+                   "location": "file:///calrissian/output-data/dumby-product-20210622191038567000/dumby-product-20210622191038567000.dataset.json",
+                   "basename": "dumby-product-20210622191038567000.dataset.json",
+   622191038567000.met.json",
+                   "basename": "dumby-product-20210622191038567000.met.json",
+                   "checksum": "sha1$620d60e084154f2ee5dd460a4b8133e794ea758e",
+                   "size": 189,
+                   "path": "/calrissian/output-data/dumby-product-20210622191038567000/dumby-product-20210622191038567000.met.json"
+               },
+               {   
+                   "class": "File",
+                   "location": "file:///calrissian/output-data/dumby-product-20210622191038567000/LC80101172015002LGN00_BQA.TIF",
+                   "basename": "LC80101172015002LGN00_BQA.TIF",
+                   "checksum": "sha1$e85ca3c7a92887593c1caa434bbc17893650baf4",
+                   "size": 2861879,
+                   "path": "/calrissian/output-data/dumby-product-20210622191038567000/LC80101172015002LGN00_BQA.TIF"
+               }
+           ],
+           "path": "/calrissian/output-data/dumby-product-20210622191038567000"
+       },
+       "stderr_run-pge": {
+           "location": "file:///calrissian/output-data/stderr_run-pge.txt",
+           "basename": "stderr_run-pge.txt",
+           "class": "File",
+           "checksum": "sha1$9340a52d43d53f44fe5847f37f102d2609978c50",
+           "size": 93300733,
+           "path": "/calrissian/output-data/stderr_run-pge.txt"
+       },
+       "stderr_stage-in": {
+           "location": "file:///calrissian/output-data/stderr_stage-in.txt",
+           "basename": "stderr_stage-in.txt",
+           "class": "File",
+           "checksum": "sha1$007c5b2d361259523791355e59d4f250bac6ad80",
+           "size": 475,
+           "path": "/calrissian/output-data/stderr_stage-in.txt"
+       },
+       "stderr_stage-out": {
+           "location": "file:///calrissian/output-data/stderr_stage-out.txt",
+           "basename": "stderr_stage-out.txt",
+           "class": "File",
+           "checksum": "sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709",
+           "size": 0,
+           "path": "/calrissian/output-data/stderr_stage-out.txt"
+       },
+       "stdout_run-pge": {
+           "location": "file:///calrissian/output-data/stdout_run-pge.txt",
+           "basename": "stdout_run-pge.txt",
+           "class": "File",
+           "checksum": "sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709",
+           "size": 0,
+           "path": "/calrissian/output-data/stdout_run-pge.txt"
+       },
+       "stdout_stage-in": {
+   INFO Final process status is success
+           "location": "file:///calrissian/output-data/stdout_stage-in.txt",
+           "basename": "stdout_stage-in.txt",
+           "class": "File",
+           "checksum": "sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709",
+           "size": 0,
+           "path": "/calrissian/output-data/stdout_stage-in.txt"
+       },
+       "stdout_stage-out": {
+           "location": "file:///calrissian/output-data/stdout_stage-out.txt",
+           "basename": "stdout_stage-out.txt",
+           "class": "File",
+           "checksum": "sha1$3d21e822ba163b0b862416dba7b285819330b2f5",
+           "size": 3058,
+           "path": "/calrissian/output-data/stdout_stage-out.txt"
+       }
+   }
+   ```
+
+   Additionally, note the jobs and pods that were created by Calrissian as a result
+   of the workflow submission:
+   ```
+   watch kubectl --namespace="$NAMESPACE_NAME" get jobs
+   watch kubectl --namespace="$NAMESPACE_NAME" get pods
+   ```
+1. Once the workflow execution is done, you can copy over the STDOUT/STDERR logs and
+   output files. In one terminal window run:
+   ```
+   kubectl --namespace="$NAMESPACE_NAME" create -f AccessVolumes.yaml
+   ```
+
+   Then copy out the output-data directory through this pod:
+   ```
+   NAMESPACE_NAME=dev
+   kubectl --namespace="$NAMESPACE_NAME" cp access-pv:/calrissian/output-data output-data
+   ```
+1. Verify that the`dumby-product-20210622191038567000` dataset directory exists in the output-data directory:
+   ```
+   ls -ltr output-data/dumby-product-20210622191038567000/
+   ```
+
+   Output should look similar to this:
+   ```
+   total 10608
+   -rw-r--r--  1 gmanipon  staff  2477207 Oct 13 13:33 dumby-product-20210622191038567000.browse.png
+   -rw-r--r--  1 gmanipon  staff    80019 Oct 13 13:33 dumby-product-20210622191038567000.browse_small.png
+   -rw-r--r--  1 gmanipon  staff        2 Oct 13 13:33 dumby-product-20210622191038567000.dataset.json
+   -rw-r--r--  1 gmanipon  staff      189 Oct 13 13:33 dumby-product-20210622191038567000.met.json
+   -rw-r--r--  1 gmanipon  staff  2861879 Oct 13 13:33 LC80101172015002LGN00_BQA.TIF
+   ```
+
+   and was staged to the S3 bucket location:
+   ```
+   aws s3 ls $(grep workflow_base_dataset_url baseline-pge-workflow-job.yml | awk '{print $2}')/$(grep workflow_product_id baseline-pge-workflow-job.yml | awk '{print $2}')/
+   ```
+
+   Output should look similar to this:
+   ```
+   2021-10-13 13:32:49    2861879 LC80101172015002LGN00_BQA.TIF
+   2021-10-13 13:32:49    2477207 dumby-product-20210622191038567000.browse.png
+   2021-10-13 13:32:49      80019 dumby-product-20210622191038567000.browse_small.png
+   2021-10-13 13:32:49          2 dumby-product-20210622191038567000.dataset.json
+   2021-10-13 13:32:49        189 dumby-product-20210622191038567000.met.json
+   ```
+
+### K8s Caveats
+
+#### Azure Kubernetes Service
+
+The default storage class utilizes azure disk which doesn't support `ReadWriteMany` which is required by
+Calrissian. To change the default storage class to azure-file (which supports `ReadWriteMany`):
+
 ```
-git clone https://github.com/pymonger/downsample-landsat.git
-cd downsample-landsat
-docker build --rm --force-rm -t pymonger/downsample-landsat:latest -f Dockerfile .
+$ kubectl get storageclass
+NAME                PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+azurefile           kubernetes.io/azure-file   Delete          Immediate              true                   106d
+azurefile-premium   kubernetes.io/azure-file   Delete          Immediate              true                   106d
+default (default)   kubernetes.io/azure-disk   Delete          WaitForFirstConsumer   true                   106d
+managed-premium     kubernetes.io/azure-disk   Delete          WaitForFirstConsumer   true                   106d
+
+$ kubectl patch storageclass default -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+storageclass.storage.k8s.io/default patched
+
+$ kubectl get storageclass
+NAME                PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+azurefile           kubernetes.io/azure-file   Delete          Immediate              true                   106d
+azurefile-premium   kubernetes.io/azure-file   Delete          Immediate              true                   106d
+default             kubernetes.io/azure-disk   Delete          WaitForFirstConsumer   true                   106d
+managed-premium     kubernetes.io/azure-disk   Delete          WaitForFirstConsumer   true                   106d
+
+$ kubectl patch storageclass azurefile -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+storageclass.storage.k8s.io/azurefile patched
+
+$ kubectl get storageclass
+NAME                  PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+azurefile (default)   kubernetes.io/azure-file   Delete          Immediate              true                   106d
+azurefile-premium     kubernetes.io/azure-file   Delete          Immediate              true                   106d
+default               kubernetes.io/azure-disk   Delete          WaitForFirstConsumer   true                   106d
+managed-premium       kubernetes.io/azure-disk   Delete          WaitForFirstConsumer   true                   106d
+```
+
+#### Google Kubernetes Engine
+
+The default storage class utilizes Google persistent disk which doesn't support `ReadWriteMany` 
+which is required by Calrissian. Google Cloud Filestore resolves this issue but it is a costly
+solution. The alternative is to run NFS in the GKE cluster as described here:
+https://medium.com/@Sushil_Kumar/readwritemany-persistent-volumes-in-google-kubernetes-engine-a0b93e203180
+
+Run the following to proceed with setting up an NFS server on your GKE cluster:
+```
+# provision a GCP persistent disk
+gcloud compute disks create --size=10GB --zone=us-west2-a nfs-disk
+
+# provision NFS deployment
+kubectl create -f k8s/gke/nfs-server-deployment.yaml
+
+# make NFS server accessible at a fixed IP/DNS
+kubectl create -f k8s/gke/nfs-clusterip-service.yaml
+```
+After this, continue with step 5 above but instead use the `gke/VolumeClaims.yaml` instead:
+```
+kubectl --namespace="$NAMESPACE_NAME" create -f k8s/gke/VolumeClaims.yaml
+```
+
+#### Elastic Kubernetes Service
+
+The default storage class in EKS doesn't support `ReadWriteMany` which is required by 
+Calrissian. To accomodate this requirement, we can use EFS to provide `ReadWriteMany`
+volumes:
+https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html
+
+Continue with step 5 above but instead use the `k8s/eks/VolumeClaims.yaml` instead:
+```
+kubectl --namespace="$NAMESPACE_NAME" create -f k8s/eks/VolumeClaims.yaml
 ```
