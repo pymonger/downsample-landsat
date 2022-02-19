@@ -28,81 +28,81 @@ Example CWL workflow calling a papermilled notebook.
    Output should look similar to this:
 
    ```
-   INFO /Users/pymonger/dev/dowsample-landsat/env/bin/cwl-runner 3.1.20220117131913
-   INFO Resolved 'downsample_landsat.cwl' to 'file:///Users/pymonger/dev/downsample-landsat/downsample_landsat.cwl'
-   INFO [job downsample_landsat.cwl] /private/tmp/docker_tmpbcv4mmls$ docker \
+   INFO /Users/gmanipon/dev/downsample-landsat/env/bin/cwltool 3.1.20220217222804
+   INFO Resolved 'downsample_landsat.cwl' to 'file:///Users/gmanipon/dev/downsample-landsat/downsample_landsat.cwl'
+   INFO [job downsample_landsat.cwl] /private/tmp/docker_tmpnrpkmkcx$ docker \
        run \
        -i \
-       --mount=type=bind,source=/private/tmp/docker_tmpbcv4mmls,target=/OroRkb \
-       --mount=type=bind,source=/private/tmp/docker_tmp0w63wmpp,target=/tmp \
-       --workdir=/OroRkb \
+       --mount=type=bind,source=/private/tmp/docker_tmpnrpkmkcx,target=/XHcuTa \
+       --mount=type=bind,source=/private/tmp/docker_tmp5d82bqd2,target=/tmp \
+       --workdir=/XHcuTa \
        --log-driver=none \
        --rm \
-       --cidfile=/private/tmp/docker_tmphd_hv1a0/20220218154822-867596.cid \
+       --cidfile=/private/tmp/docker_tmpyjp_9jit/20220218162051-497685.cid \
        --env=TMPDIR=/tmp \
-       --env=HOME=/OroRkb \
+       --env=HOME=/XHcuTa \
        pymonger/downsample-landsat:latest \
        /bin/sh \
        -c \
-       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_url "https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF" --parameters min_spin_time "20" --parameters max_spin_time "40" > /private/tmp/docker_tmpbcv4mmls/downsample_landsat-stdout.txt 2> /private/tmp/docker_tmpbcv4mmls/downsample_landsat-stderr.txt
-   INFO [job downsample_landsat.cwl] Max memory used: 4115MiB
+       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_url "https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF" --parameters min_spin_time "20" --parameters max_spin_time "40" > /private/tmp/docker_tmpnrpkmkcx/downsample_landsat-stdout.txt 2> /private/tmp/docker_tmpnrpkmkcx/downsample_landsat-stderr.txt
+   INFO [job downsample_landsat.cwl] Max memory used: 1890MiB
    INFO [job downsample_landsat.cwl] completed success
    {
        "dataset_dir": {
-           "location": "file:///Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled",
+           "location": "file:///Users/gmanipon/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled",
            "basename": "LC80650452017120LGN00_BQA_downsampled",
            "class": "Directory",
            "listing": [
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.met.json",
+                   "location": "file:///Users/gmanipon/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.met.json",
                    "basename": "LC80650452017120LGN00_BQA_downsampled.met.json",
                    "checksum": "sha1$e1e7944264d47886becec7442213a9f97b13f1a0",
                    "size": 3008,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.met.json"
+                   "path": "/Users/gmanipon/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.met.json"
                },
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.TIF",
+                   "location": "file:///Users/gmanipon/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.TIF",
                    "basename": "LC80650452017120LGN00_BQA_downsampled.TIF",
                    "checksum": "sha1$57267ecbe6d1a4cbfd0c547829238953fae27b8f",
                    "size": 20777,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.TIF"
+                   "path": "/Users/gmanipon/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.TIF"
                },
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.browse.png",
+                   "location": "file:///Users/gmanipon/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.browse.png",
                    "basename": "LC80650452017120LGN00_BQA_downsampled.browse.png",
-                   "checksum": "sha1$9058f1925184b020cadf8f0ba6bdbfef7875e6a2",
+                   "checksum": "sha1$3339445859af69181acf691e238af493f61d4d27",
                    "size": 49848,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.browse.png"
+                   "path": "/Users/gmanipon/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.browse.png"
                }
            ],
-           "path": "/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled"
+           "path": "/Users/gmanipon/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled"
        },
        "output_nb_file": {
-           "location": "file:///Users/pymonger/dev/downsample-landsat/output_nb.ipynb",
+           "location": "file:///Users/gmanipon/dev/downsample-landsat/output_nb.ipynb",
            "basename": "output_nb.ipynb",
            "class": "File",
-           "checksum": "sha1$75de15695bcdce2ea5c2380908f8b8aa3782ab4f",
-           "size": 12599,
-           "path": "/Users/pymonger/dev/downsample-landsat/output_nb.ipynb"
+           "checksum": "sha1$85ffe4cf55c8b999ca73f89448c5e8b6ce0ab432",
+           "size": 12598,
+           "path": "/Users/gmanipon/dev/downsample-landsat/output_nb.ipynb"
        },
        "stderr_file": {
-           "location": "file:///Users/pymonger/dev/downsample-landsat/downsample_landsat-stderr.txt",
+           "location": "file:///Users/gmanipon/dev/downsample-landsat/downsample_landsat-stderr.txt",
            "basename": "downsample_landsat-stderr.txt",
            "class": "File",
-           "checksum": "sha1$eb409e0ec0ed3e8212732aad0a725d4c3d45d41a",
-           "size": 1186,
-           "path": "/Users/pymonger/dev/downsample-landsat/downsample_landsat-stderr.txt"
+           "checksum": "sha1$ecff815dcf78ab0a23de9c47257527b2354abb26",
+           "size": 1184,
+           "path": "/Users/gmanipon/dev/downsample-landsat/downsample_landsat-stderr.txt"
        },
        "stdout_file": {
-           "location": "file:///Users/pymonger/dev/downsample-landsat/downsample_landsat-stdout.txt",
+           "location": "file:///Users/gmanipon/dev/downsample-landsat/downsample_landsat-stdout.txt",
            "basename": "downsample_landsat-stdout.txt",
            "class": "File",
            "checksum": "sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709",
            "size": 0,
-           "path": "/Users/pymonger/dev/downsample-landsat/downsample_landsat-stdout.txt"
+           "path": "/Users/gmanipon/dev/downsample-landsat/downsample_landsat-stdout.txt"
        }
    }
    INFO Final process status is success
@@ -115,9 +115,9 @@ Example CWL workflow calling a papermilled notebook.
    Output should look similar to this:
    ``` 
    total 160
-   -rw-r--r--  1 pymonger  wheel  20777 Feb 18 15:51 LC80650452017120LGN00_BQA_downsampled.TIF
-   -rw-r--r--  1 pymonger  wheel  49848 Feb 18 15:51 LC80650452017120LGN00_BQA_downsampled.browse.png
-   -rw-r--r--  1 pymonger  wheel   3008 Feb 18 15:51 LC80650452017120LGN00_BQA_downsampled.met.json
+   -rw-r--r--  1 gmanipon  wheel  20777 Feb 18 16:21 LC80650452017120LGN00_BQA_downsampled.TIF
+   -rw-r--r--  1 gmanipon  wheel  49848 Feb 18 16:21 LC80650452017120LGN00_BQA_downsampled.browse.png
+   -rw-r--r--  1 gmanipon  wheel   3008 Feb 18 16:21 LC80650452017120LGN00_BQA_downsampled.met.json
    ```
    You can visualize the `LC80650452017120LGN00_BQA_downsampled.TIF` file in QGIS.
 
@@ -128,12 +128,12 @@ Building off of the previous dowsample_landsat example:
    If not, run the `downsample_landsat` example above.
 1. Copy the `stage_out-inputs.yml.tmpl` file to `stage_out-inputs.yml`:
    ```
-   cp stage_out-job.yml.tmpl stage_out-job.yml
+   cp stage_out-inputs.yml.tmpl stage_out-inputs.yml
    ```
 
-   then edit `stage_out-job.yml`:
+   then edit `stage_out-inputs.yml`:
    ```
-   vi stage_out-job.yml
+   vi stage_out-inputs.yml
    ```
 
    and insert the values for:
