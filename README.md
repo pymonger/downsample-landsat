@@ -1,7 +1,17 @@
 # downsample-landsat
 Example CWL workflow calling a papermilled notebook.
 
-## Prerequisites
+## Running Jupyter Lab
+```
+git clone https://github.com/pymonger/downsample-landsat.git
+cd downsample-landsat
+docker run -p 8888:8888 -v ${PWD}:/home/jovyan/downsample-landsat \
+  pymonger/downsample-landsat:latest jupyter lab
+```
+
+## Running cwltool
+
+### Prerequisites
 
 1. Clone repo:
    ```
@@ -19,7 +29,7 @@ Example CWL workflow calling a papermilled notebook.
    pip install cwltool
    ```
 
-## Run downsample-landsat example
+### Run downsample-landsat example
 1. Run cwltool (to run singularity instead of docker, add `--singularity` option):
    ```
    cwltool --no-match-user --no-read-only downsample_landsat.cwl downsample_landsat-inputs.yml 
@@ -121,7 +131,7 @@ Example CWL workflow calling a papermilled notebook.
    ```
    You can visualize the `LC80650452017120LGN00_BQA_downsampled.TIF` file in QGIS.
 
-## Run stage_out example
+### Run stage_out example
 
 Building off of the previous dowsample_landsat example:
 1. Ensure that the `LC80650452017120LGN00_BQA_downsampled` dataset directory exists.
@@ -208,7 +218,7 @@ Building off of the previous dowsample_landsat example:
    2022-02-18 16:25:52       3008 LC80650452017120LGN00_BQA_downsampled.met.json
    ```
 
-## Run 2-step workflow (downsample_landsat & stage_out) example
+### Run 2-step workflow (downsample_landsat & stage_out) example
 Now that we've seen the individual steps at work, we can proceed with running them in 
 a CWL workflow.
 
