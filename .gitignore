@@ -134,4 +134,4 @@ LC8*_downsampled
 *-stdout.txt
 output_nb.ipynb
 *.tmp
-stage_out-inputs.yaml
+stage_out-inputs.yml
