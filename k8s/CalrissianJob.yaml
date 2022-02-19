@@ -1,0 +1,70 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: calrissian-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: calrissian-job
+        image: pymonger/calrissian:latest
+        imagePullPolicy: Always
+        envFrom:
+          - secretRef:
+              name: aws-creds
+        command: ["calrissian"]
+        args:
+          - "--debug"
+          - "--stdout"
+          - "/calrissian/output-data/docker-output.json"
+          - "--stderr"
+          - "/calrissian/output-data/docker-stderr.log"
+          - "--max-ram"
+          - "16G"
+          - "--max-cores"
+          - "8"
+          - "--tmp-outdir-prefix"
+          - "/calrissian/tmpout/"
+          - "--outdir"
+          - "/calrissian/output-data/"
+          - "--usage-report"
+          - "/calrissian/output-data/docker-usage.json"
+          - "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl"
+          - "--workflow_input_url"
+          - "https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF"
+          - "--workflow_min_spin_time"
+          - "15"
+          - "--workflow_max_spin_time"
+          - "30"
+          - "--workflow_aws_access_key_id"
+          - "$(aws_access_key_id)"
+          - "--workflow_aws_secret_access_key"
+          - "$(aws_secret_access_key)"
+          - "--workflow_base_dataset_url"
+          - "s3://hysds-dataset-bucket-gman-test/docker_on_desktop_k8s"
+        volumeMounts:
+        - mountPath: /calrissian/input-data
+          name: calrissian-input-data
+          readOnly: true
+        - mountPath: /calrissian/tmpout
+          name: calrissian-tmpout
+        - mountPath: /calrissian/output-data
+          name: calrissian-output-data
+        env:
+        - name: CALRISSIAN_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      restartPolicy: Never
+      volumes:
+      - name: calrissian-input-data
+        persistentVolumeClaim:
+          claimName: calrissian-input-data
+          readOnly: true
+      - name: calrissian-tmpout
+        persistentVolumeClaim:
+          claimName: calrissian-tmpout
+      - name: calrissian-output-data
+        persistentVolumeClaim:
+          claimName: calrissian-output-data

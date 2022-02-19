@@ -479,114 +479,507 @@ workflows and their composite steps as K8s jobs.
 
    Output should be similar to this:
    ```
-   INFO calrissian 0.10.0 (cwltool 3.1.20211004060744)                                                               INFO https://raw.githubusercontent.com/pymonger/soamc-cwl-demo/develop/baseline-pge/baseline-pge-workflow.cwl:1:1: Unknown hint
-                                                                                                                 http://commonwl.org/cwltool#Secrets
-   INFO https://raw.githubusercontent.com/pymonger/soamc-cwl-demo/develop/baseline-pge/stage-out.cwl:1:1: Unknown hint
-                                                                                                     http://commonwl.org/cwltool#Secrets
-   INFO [workflow ] starting step stage-in
-   INFO [step stage-in] start
+   INFO calrissian 0.10.0 (cwltool 3.1)
+   https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl:8:3: Warning: checking
+                                                                                        item
+                                                                                        Warning:   Field
+                                                                                        `class` contains
+                                                                                        undefined reference
+                                                                                        to
+                                                                                        `http://commonwl.org/cwltool#Secrets`
+   INFO https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl:8:3: Unknown hint
+                                                                                        http://commonwl.org/cwltool#Secrets
+   https://raw.githubusercontent.com/pymonger/downsample-landsat/main/stage_out.cwl:8:3: Warning: checking
+                                                                                         item
+                                                                                         Warning:   Field
+                                                                                         `class` contains
+                                                                                         undefined reference
+                                                                                         to
+                                                                                         `http://commonwl.org/cwltool#Secrets`
+   INFO https://raw.githubusercontent.com/pymonger/downsample-landsat/main/stage_out.cwl:8:3: Unknown hint
+                                                                                         http://commonwl.org/cwltool#Secrets
+   DEBUG Parsed job order from command line: {
+       "id": "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl",
+       "workflow_aws_access_key_id": "(secret-cb144351-cd82-4f32-b7ce-8aca63f2284d)",
+       "workflow_aws_secret_access_key": "(secret-7babf4eb-2f48-4253-ae99-10f85d86647b)",
+       "workflow_base_dataset_url": "s3://hysds-dataset-bucket-gman-test/docker_on_desktop_k8s",
+       "workflow_input_url": "https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF",
+       "workflow_max_spin_time": 30,
+       "workflow_min_spin_time": 15
+   }
+   DEBUG Starting ThreadPoolJobExecutor.run_jobs: total_resources=[ram: 16000.0, cores: 8.0], max_workers=None
+   DEBUG [workflow ] initialized from https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl
+   DEBUG wait_for_completion with 0 futures
+   DEBUG [workflow ] inputs {
+       "workflow_aws_access_key_id": "(secret-cb144351-cd82-4f32-b7ce-8aca63f2284d)",
+       "workflow_aws_secret_access_key": "(secret-7babf4eb-2f48-4253-ae99-10f85d86647b)",
+       "workflow_base_dataset_url": "s3://hysds-dataset-bucket-gman-test/docker_on_desktop_k8s",
+       "workflow_input_url": "https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF",
+       "workflow_max_spin_time": 30,
+       "workflow_min_spin_time": 15
+   }
+   DEBUG [workflow ] job step https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#stage_out not ready
+   INFO [workflow ] starting step downsample_landsat
+   DEBUG [step downsample_landsat] job input {
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#downsample_landsat/input_url": "https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF",
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#downsample_landsat/max_spin_time": 30,
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#downsample_landsat/min_spin_time": 15
+   }
+   DEBUG [step downsample_landsat] evaluated job input to {
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#downsample_landsat/input_url": "https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF",
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#downsample_landsat/max_spin_time": 30,
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#downsample_landsat/min_spin_time": 15
+   }
+   INFO [step downsample_landsat] start
+   DEBUG [job downsample_landsat] initializing from https://raw.githubusercontent.com/pymonger/downsample-landsat/main/downsample_landsat.cwl as part of step downsample_landsat
+   DEBUG [job downsample_landsat] {
+       "input_url": "https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF",
+       "max_spin_time": 30,
+       "min_spin_time": 15
+   }
+   DEBUG [job downsample_landsat] path mappings is {}
+   DEBUG [job downsample_landsat] command line bindings is [
+       {
+           "position": [
+               -1000000,
+               0
+           ],
+           "datum": "papermill"
+       },
+       {
+           "position": [
+               -1000000,
+               1
+           ],
+           "datum": "/home/jovyan/downsample-landsat/downsample_landsat.ipynb"
+       },
+       {
+           "position": [
+               -1000000,
+               2
+           ],
+           "datum": "output_nb.ipynb"
+       },
+       {
+           "position": [
+               1,
+               "input_url"
+           ],
+           "shellQuote": false,
+           "prefix": "--parameters",
+           "valueFrom": "input_url \"$(self)\"\n",
+           "datum": "https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF"
+       },
+       {
+           "position": [
+               2,
+               "min_spin_time"
+           ],
+           "shellQuote": false,
+           "prefix": "--parameters",
+           "valueFrom": "min_spin_time \"$(self)\"\n",
+           "datum": 15
+       },
+       {
+           "position": [
+               3,
+               "max_spin_time"
+           ],
+           "shellQuote": false,
+           "prefix": "--parameters",
+           "valueFrom": "max_spin_time \"$(self)\"\n",
+           "datum": 30
+       }
+   ]
+   DEBUG wait_for_completion with 0 futures
+   DEBUG [workflow ] job step https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#stage_out not ready
+   DEBUG allocate [ram: 0, cores: 0] from available [ram: 16000.0, cores: 8.0]
    INFO [workflow ] start
-   INFO [step stage-in] completed success
-   INFO [workflow ] starting step run-pge
-   INFO [step run-pge] start
-   INFO [step run-pge] completed success
-   INFO [workflow ] starting step stage-out
-   INFO [step stage-out] start
-   INFO [step stage-out] completed success
+   DEBUG restore [ram: 0, cores: 0] to available [ram: 16000.0, cores: 8.0]
+   DEBUG allocate [ram: 256, cores: 1] from available [ram: 16000.0, cores: 8.0]
+   DEBUG [job downsample_landsat] initial work dir {}
+   DEBUG wait_for_completion with 2 futures
+   DEBUG [workflow ] job step https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#stage_out not ready
+   DEBUG wait_for_completion with 1 futures
+   Building resources spec from {'cores': 1, 'ram': 256}
+   --------------------------------------------------------------------------------
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     labels: {}
+     name: downsample-landsat-pod-tjcdhksn
+   spec:
+     containers:
+     - args:
+       - /bin/sh -c 'papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb
+         output_nb.ipynb --parameters input_url "https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF"
+         --parameters min_spin_time "15" --parameters max_spin_time "30"'
+       command:
+       - /bin/sh
+       - -c
+       env:
+       - name: HOME
+         value: /kBtvyI
+       - name: TMPDIR
+         value: /tmp
+       image: !!python/object/new:ruamel.yaml.scalarstring.SingleQuotedScalarString
+       - pymonger/downsample-landsat:latest
+       imagePullPolicy: Always
+       name: downsample-landsat-container
+       resources:
+         requests:
+           cpu: '1'
+           memory: 256Mi
+       volumeMounts:
+       - mountPath: /kBtvyI
+         name: calrissian-tmpout
+         readOnly: false
+         subPath: ls7u6duy
+       - mountPath: /tmp
+         name: tmpdir
+       workingDir: /kBtvyI
+     initContainers: []
+     restartPolicy: Never
+     securityContext:
+       runAsGroup: 0
+       runAsUser: 1001
+     volumes:
+     - name: calrissian-input-data
+       persistentVolumeClaim:
+         claimName: calrissian-input-data
+         readOnly: true
+     - name: calrissian-tmpout
+       persistentVolumeClaim:
+         claimName: calrissian-tmpout
+         readOnly: false
+     - name: calrissian-output-data
+       persistentVolumeClaim:
+         claimName: calrissian-output-data
+         readOnly: false
+     - emptyDir: {}
+       name: tmpdir
+   --------------------------------------------------------------------------------
+   
+   Created k8s pod name downsample-landsat-pod-tjcdhksn with id 81ee5e8a-3cba-4a6e-99bd-3d3bb70002b3
+   PodMonitor adding downsample-landsat-pod-tjcdhksn
+   k8s pod 'downsample-landsat-pod-tjcdhksn' started
+   [downsample-landsat-pod-tjcdhksn] follow_logs start
+   [downsample-landsat-pod-tjcdhksn] Input Notebook:  /home/jovyan/downsample-landsat/downsample_landsat.ipynb
+   [downsample-landsat-pod-tjcdhksn] Output Notebook: output_nb.ipynb
+   [downsample-landsat-pod-tjcdhksn] Generating grammar tables from /opt/conda/lib/python3.9/site-packages/blib2to3/Grammar.txt
+   [downsample-landsat-pod-tjcdhksn] Writing grammar tables to /kBtvyI/.cache/black/22.1.0/Grammar3.9.7.final.0.pickle
+   [downsample-landsat-pod-tjcdhksn] Writing failed: [Errno 2] No such file or directory: '/kBtvyI/.cache/black/22.1.0/tmp2ifqiq0k'
+   [downsample-landsat-pod-tjcdhksn] Generating grammar tables from /opt/conda/lib/python3.9/site-packages/blib2to3/PatternGrammar.txt
+   [downsample-landsat-pod-tjcdhksn] Writing grammar tables to /kBtvyI/.cache/black/22.1.0/PatternGrammar3.9.7.final.0.pickle
+   [downsample-landsat-pod-tjcdhksn] Writing failed: [Errno 2] No such file or directory: '/kBtvyI/.cache/black/22.1.0/tmpkeqysb0y'
+   Executing:   0%|          | 0/13 [00:00<?, ?cell/s]Executing notebook with kernel: python3
+   Executing: 100%|██████████| 13/13 [00:24<00:00,  1.91s/cell]
+   [downsample-landsat-pod-tjcdhksn] follow_logs end
+   Handling terminated pod name downsample-landsat-pod-tjcdhksn with id 81ee5e8a-3cba-4a6e-99bd-3d3bb70002b3
+   handling completion with 0
+   CALRISSIAN_DELETE_PODS=(<class 'str'>)
+   returning True
+   PodMonitor removing downsample-landsat-pod-tjcdhksn
+   DEBUG [step downsample_landsat] produced output {
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#downsample_landsat/output_nb_file": {
+           "location": "file:///calrissian/tmpout/ls7u6duy/output_nb.ipynb",
+           "basename": "output_nb.ipynb",
+           "nameroot": "output_nb",
+           "nameext": ".ipynb",
+           "class": "File",
+           "checksum": "sha1$a527d72f07bf3a93d31c715e2480c4c1fde4853d",
+           "size": 12599,
+           "http://commonwl.org/cwltool#generation": 0
+       },
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#downsample_landsat/dataset_dir": {
+           "location": "file:///calrissian/tmpout/ls7u6duy/LC80650452017120LGN00_BQA_downsampled",
+           "basename": "LC80650452017120LGN00_BQA_downsampled",
+           "nameroot": "LC80650452017120LGN00_BQA_downsampled",
+           "nameext": "",
+           "class": "Directory"
+       }
+   }
+   INFO [step downsample_landsat] completed success
+   shutil.rmtree(/tmp/lu68xq66, True)
+   shutil.rmtree(/tmp/k3t1gb1f, True)
+   DEBUG restore [ram: 256, cores: 1] to available [ram: 15744.0, cores: 7.0]
+   INFO [workflow ] starting step stage_out
+   DEBUG [step stage_out] job input {
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#stage_out/aws_access_key_id": "(secret-cb144351-cd82-4f32-b7ce-8aca63f2284d)",
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#stage_out/aws_secret_access_key": "(secret-7babf4eb-2f48-4253-ae99-10f85d86647b)",
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#stage_out/base_dataset_url": "s3://hysds-dataset-bucket-gman-test/docker_on_desktop_k8s",
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#stage_out/dataset_dir": {
+           "location": "file:///calrissian/tmpout/ls7u6duy/LC80650452017120LGN00_BQA_downsampled",
+           "basename": "LC80650452017120LGN00_BQA_downsampled",
+           "nameroot": "LC80650452017120LGN00_BQA_downsampled",
+           "nameext": "",
+           "class": "Directory"
+       }
+   }
+   DEBUG [step stage_out] evaluated job input to {
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#stage_out/aws_access_key_id": "(secret-cb144351-cd82-4f32-b7ce-8aca63f2284d)",
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#stage_out/aws_secret_access_key": "(secret-7babf4eb-2f48-4253-ae99-10f85d86647b)",
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#stage_out/base_dataset_url": "s3://hysds-dataset-bucket-gman-test/docker_on_desktop_k8s",
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#stage_out/dataset_dir": {
+           "location": "file:///calrissian/tmpout/ls7u6duy/LC80650452017120LGN00_BQA_downsampled",
+           "basename": "LC80650452017120LGN00_BQA_downsampled",
+           "nameroot": "LC80650452017120LGN00_BQA_downsampled",
+           "nameext": "",
+           "class": "Directory"
+       }
+   }
+   INFO [step stage_out] start
+   DEBUG [job stage_out] initializing from https://raw.githubusercontent.com/pymonger/downsample-landsat/main/stage_out.cwl as part of step stage_out
+   DEBUG [job stage_out] {
+       "aws_access_key_id": "(secret-cb144351-cd82-4f32-b7ce-8aca63f2284d)",
+       "aws_secret_access_key": "(secret-7babf4eb-2f48-4253-ae99-10f85d86647b)",
+       "base_dataset_url": "s3://hysds-dataset-bucket-gman-test/docker_on_desktop_k8s",
+       "dataset_dir": {
+           "location": "file:///calrissian/tmpout/ls7u6duy/LC80650452017120LGN00_BQA_downsampled",
+           "basename": "LC80650452017120LGN00_BQA_downsampled",
+           "nameroot": "LC80650452017120LGN00_BQA_downsampled",
+           "nameext": "",
+           "class": "Directory"
+       }
+   }
+   DEBUG [job stage_out] path mappings is {
+       "file:///calrissian/tmpout/ls7u6duy/LC80650452017120LGN00_BQA_downsampled": [
+           "/calrissian/tmpout/ls7u6duy/LC80650452017120LGN00_BQA_downsampled",
+           "/var/lib/cwl/stg79c71992-5ea9-458b-b95b-4a5c6e21b484/LC80650452017120LGN00_BQA_downsampled",
+           "Directory",
+           true
+       ]
+   }
+   DEBUG [job stage_out] command line bindings is [
+       {
+           "position": [
+               -1000000,
+               0
+           ],
+           "datum": "sh"
+       },
+       {
+           "position": [
+               0,
+               0
+           ],
+           "datum": "-c"
+       },
+       {
+           "position": [
+               0,
+               1
+           ],
+           "valueFrom": "if [ ! -d $HOME/.aws ]; then cp -rp .aws $HOME/; fi && aws s3 cp --recursive $(inputs.dataset_dir.path) $(inputs.base_dataset_url)/$(inputs.dataset_dir.basename)"
+       }
+   ]
+   DEBUG wait_for_completion with 0 futures
+   DEBUG allocate [ram: 256, cores: 1] from available [ram: 16000.0, cores: 8.0]
+   DEBUG [job stage_out] initial work dir {
+       "_:a80ef6fb-1daf-4bbf-b9f6-4bdfb083f2cf": [
+           "[default]\noutput = json\nregion = us-west-2\naws_access_key_id = (secret-cb144351-cd82-4f32-b7ce-8aca63f2284d)\naws_secret_access_key = (secret-7babf4eb-2f48-4253-ae99-10f85d86647b)\n",
+           "/kBtvyI/.aws/credentials",
+           "CreateFile",
+           true
+       ]
+   }
+   DEBUG wait_for_completion with 1 futures
+   Building resources spec from {'cores': 1, 'ram': 256}
+   --------------------------------------------------------------------------------
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     labels: {}
+     name: stage-out-pod-jtxmxcmo
+   spec:
+     containers:
+     - args:
+       - sh -c 'if [ ! -d $HOME/.aws ]; then cp -rp .aws $HOME/; fi && aws s3 cp --recursive
+         /var/lib/cwl/stg79c71992-5ea9-458b-b95b-4a5c6e21b484/LC80650452017120LGN00_BQA_downsampled
+         s3://hysds-dataset-bucket-gman-test/docker_on_desktop_k8s/LC80650452017120LGN00_BQA_downsampled'
+         > stage_out-stdout.txt 2> stage_out-stderr.txt
+       command:
+       - /bin/sh
+       - -c
+       env:
+       - name: HOME
+         value: /kBtvyI
+       - name: TMPDIR
+         value: /tmp
+       image: pymonger/aws-cli
+       imagePullPolicy: Always
+       name: stage-out-container
+       resources:
+         requests:
+           cpu: '1'
+           memory: 256Mi
+       volumeMounts:
+       - mountPath: /kBtvyI
+         name: calrissian-tmpout
+         readOnly: false
+         subPath: lq4s56o8
+       - mountPath: /tmp
+         name: tmpdir
+       - mountPath: /var/lib/cwl/stg79c71992-5ea9-458b-b95b-4a5c6e21b484/LC80650452017120LGN00_BQA_downsampled
+         name: calrissian-tmpout
+         readOnly: true
+         subPath: ls7u6duy/LC80650452017120LGN00_BQA_downsampled
+       workingDir: /kBtvyI
+     initContainers: []
+     restartPolicy: Never
+     securityContext:
+       runAsGroup: 0
+       runAsUser: 1001
+     volumes:
+     - name: calrissian-input-data
+       persistentVolumeClaim:
+         claimName: calrissian-input-data
+         readOnly: true
+     - name: calrissian-tmpout
+       persistentVolumeClaim:
+         claimName: calrissian-tmpout
+         readOnly: false
+     - name: calrissian-output-data
+       persistentVolumeClaim:
+         claimName: calrissian-output-data
+         readOnly: false
+     - emptyDir: {}
+       name: tmpdir
+   --------------------------------------------------------------------------------
+   
+   Created k8s pod name stage-out-pod-jtxmxcmo with id 2584dbf3-a249-488e-b0ca-f31ce0873807
+   PodMonitor adding stage-out-pod-jtxmxcmo
+   k8s pod 'stage-out-pod-jtxmxcmo' started
+   [stage-out-pod-jtxmxcmo] follow_logs start
+   [stage-out-pod-jtxmxcmo] follow_logs end
+   Handling terminated pod name stage-out-pod-jtxmxcmo with id 2584dbf3-a249-488e-b0ca-f31ce0873807
+   handling completion with 0
+   CALRISSIAN_DELETE_PODS=(<class 'str'>)
+   returning True
+   PodMonitor removing stage-out-pod-jtxmxcmo
+   DEBUG [step stage_out] produced output {
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#stage_out/stdout_file": {
+           "location": "file:///calrissian/tmpout/lq4s56o8/stage_out-stdout.txt",
+           "basename": "stage_out-stdout.txt",
+           "nameroot": "stage_out-stdout",
+           "nameext": ".txt",
+           "class": "File",
+           "checksum": "sha1$1e07a567218c77e7b180e996acf38a35910e9cdb",
+           "size": 1202,
+           "http://commonwl.org/cwltool#generation": 0
+       },
+       "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl#stage_out/stderr_file": {
+           "location": "file:///calrissian/tmpout/lq4s56o8/stage_out-stderr.txt",
+           "basename": "stage_out-stderr.txt",
+           "nameroot": "stage_out-stderr",
+           "nameext": ".txt",
+           "class": "File",
+           "checksum": "sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709",
+           "size": 0,
+           "http://commonwl.org/cwltool#generation": 0
+       }
+   }
+   INFO [step stage_out] completed success
    INFO [workflow ] completed success
+   DEBUG [workflow ] outputs {
+       "final_dataset_dir": {
+           "location": "file:///calrissian/tmpout/ls7u6duy/LC80650452017120LGN00_BQA_downsampled",
+           "basename": "LC80650452017120LGN00_BQA_downsampled",
+           "nameroot": "LC80650452017120LGN00_BQA_downsampled",
+           "nameext": "",
+           "class": "Directory"
+       },
+       "stderr-stage_out": {
+           "location": "file:///calrissian/tmpout/lq4s56o8/stage_out-stderr.txt",
+           "basename": "stage_out-stderr.txt",
+           "nameroot": "stage_out-stderr",
+           "nameext": ".txt",
+           "class": "File",
+           "checksum": "sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709",
+           "size": 0,
+           "http://commonwl.org/cwltool#generation": 0
+       },
+       "stdout-stage_out": {
+           "location": "file:///calrissian/tmpout/lq4s56o8/stage_out-stdout.txt",
+           "basename": "stage_out-stdout.txt",
+           "nameroot": "stage_out-stdout",
+           "nameext": ".txt",
+           "class": "File",
+           "checksum": "sha1$1e07a567218c77e7b180e996acf38a35910e9cdb",
+           "size": 1202,
+           "http://commonwl.org/cwltool#generation": 0
+       }
+   }
+   shutil.rmtree(/tmp/cek49zs4, True)
+   shutil.rmtree(/tmp/s0152mkc, True)
+   DEBUG restore [ram: 256, cores: 1] to available [ram: 15744.0, cores: 7.0]
+   DEBUG wait_for_completion with 0 futures
+   DEBUG wait_for_completion with 0 futures
+   DEBUG Finishing ThreadPoolExecutor.run_jobs: total_resources=[ram: 16000.0, cores: 8.0], available_resources=[ram: 16000.0, cores: 8.0]
+   DEBUG Moving /calrissian/tmpout/ls7u6duy/LC80650452017120LGN00_BQA_downsampled to /calrissian/output-data/LC80650452017120LGN00_BQA_downsampled
+   DEBUG Moving /calrissian/tmpout/ls7u6duy/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.TIF to /calrissian/output-data/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.TIF
+   DEBUG Moving /calrissian/tmpout/ls7u6duy/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.met.json to /calrissian/output-data/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.met.json
+   DEBUG Moving /calrissian/tmpout/ls7u6duy/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.browse.png to /calrissian/output-data/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.browse.png
+   DEBUG Moving /calrissian/tmpout/lq4s56o8/stage_out-stderr.txt to /calrissian/output-data/stage_out-stderr.txt
+   DEBUG Moving /calrissian/tmpout/lq4s56o8/stage_out-stdout.txt to /calrissian/output-data/stage_out-stdout.txt
+   DEBUG Removing intermediate output directory /calrissian/tmpout/ls7u6duy
+   DEBUG Removing intermediate output directory /calrissian/tmpout/lq4s56o8
+   DEBUG Removing intermediate output directory /calrissian/tmpout/y3ehijzu
    {
        "final_dataset_dir": {
-           "location": "file:///calrissian/output-data/dumby-product-20210622191038567000",
-           "basename": "dumby-product-20210622191038567000",
+           "location": "file:///calrissian/output-data/LC80650452017120LGN00_BQA_downsampled",
+           "basename": "LC80650452017120LGN00_BQA_downsampled",
            "class": "Directory",
            "listing": [
                {
                    "class": "File",
-                   "location": "file:///calrissian/output-data/dumby-product-20210622191038567000/dumby-product-20210622191038567000.browse.png",
-                   "basename": "dumby-product-20210622191038567000.browse.png",
-                   "checksum": "sha1$5cd47ad8f2cd2f7f4d8bc8df02dfb06a57b74914",
-                   "size": 2477207,
-                   "path": "/calrissian/output-data/dumby-product-20210622191038567000/dumby-product-20210622191038567000.browse.png"
+                   "location": "file:///calrissian/output-data/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.TIF",
+                   "basename": "LC80650452017120LGN00_BQA_downsampled.TIF",
+                   "checksum": "sha1$57267ecbe6d1a4cbfd0c547829238953fae27b8f",
+                   "size": 20777,
+                   "path": "/calrissian/output-data/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.TIF"
                },
                {
                    "class": "File",
-                   "location": "file:///calrissian/output-data/dumby-product-20210622191038567000/dumby-product-20210622191038567000.browse_small.png",
-                   "basename": "dumby-product-20210622191038567000.browse_small.png",
-                   "checksum": "sha1$8230dd45fdeb8a376840c9edd9b064e8625090fc",
-                   "size": 80019,
-                   "path": "/calrissian/output-data/dumby-product-20210622191038567000/dumby-product-20210622191038567000.browse_small.png"
+                   "location": "file:///calrissian/output-data/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.met.json",
+                   "basename": "LC80650452017120LGN00_BQA_downsampled.met.json",
+                   "checksum": "sha1$e1e7944264d47886becec7442213a9f97b13f1a0",
+                   "size": 3008,
+                   "path": "/calrissian/output-data/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.met.json"
                },
                {
                    "class": "File",
-                   "location": "file:///calrissian/output-data/dumby-product-20210622191038567000/dumby-product-20210622191038567000.dataset.json",
-                   "basename": "dumby-product-20210622191038567000.dataset.json",
-   622191038567000.met.json",
-                   "basename": "dumby-product-20210622191038567000.met.json",
-                   "checksum": "sha1$620d60e084154f2ee5dd460a4b8133e794ea758e",
-                   "size": 189,
-                   "path": "/calrissian/output-data/dumby-product-20210622191038567000/dumby-product-20210622191038567000.met.json"
-               },
-               {   
-                   "class": "File",
-                   "location": "file:///calrissian/output-data/dumby-product-20210622191038567000/LC80101172015002LGN00_BQA.TIF",
-                   "basename": "LC80101172015002LGN00_BQA.TIF",
-                   "checksum": "sha1$e85ca3c7a92887593c1caa434bbc17893650baf4",
-                   "size": 2861879,
-                   "path": "/calrissian/output-data/dumby-product-20210622191038567000/LC80101172015002LGN00_BQA.TIF"
+                   "location": "file:///calrissian/output-data/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.browse.png",
+                   "basename": "LC80650452017120LGN00_BQA_downsampled.browse.png",
+                   "checksum": "sha1$11ce07256eaeda95c992c1c98e7cf0971b8c2497",
+                   "size": 49848,
+                   "path": "/calrissian/output-data/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.browse.png"
                }
            ],
-           "path": "/calrissian/output-data/dumby-product-20210622191038567000"
+           "path": "/calrissian/output-data/LC80650452017120LGN00_BQA_downsampled"
        },
-       "stderr_run-pge": {
-           "location": "file:///calrissian/output-data/stderr_run-pge.txt",
-           "basename": "stderr_run-pge.txt",
-           "class": "File",
-           "checksum": "sha1$9340a52d43d53f44fe5847f37f102d2609978c50",
-           "size": 93300733,
-           "path": "/calrissian/output-data/stderr_run-pge.txt"
-       },
-       "stderr_stage-in": {
-           "location": "file:///calrissian/output-data/stderr_stage-in.txt",
-           "basename": "stderr_stage-in.txt",
-           "class": "File",
-           "checksum": "sha1$007c5b2d361259523791355e59d4f250bac6ad80",
-           "size": 475,
-           "path": "/calrissian/output-data/stderr_stage-in.txt"
-       },
-       "stderr_stage-out": {
-           "location": "file:///calrissian/output-data/stderr_stage-out.txt",
-           "basename": "stderr_stage-out.txt",
+       "stderr-stage_out": {
+           "location": "file:///calrissian/output-data/stage_out-stderr.txt",
+           "basename": "stage_out-stderr.txt",
            "class": "File",
            "checksum": "sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709",
            "size": 0,
-           "path": "/calrissian/output-data/stderr_stage-out.txt"
+           "path": "/calrissian/output-data/stage_out-stderr.txt"
        },
-       "stdout_run-pge": {
-           "location": "file:///calrissian/output-data/stdout_run-pge.txt",
-           "basename": "stdout_run-pge.txt",
+       "stdout-stage_out": {
+           "location": "file:///calrissian/output-data/stage_out-stdout.txt",
+           "basename": "stage_out-stdout.txt",
            "class": "File",
-           "checksum": "sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709",
-           "size": 0,
-           "path": "/calrissian/output-data/stdout_run-pge.txt"
-       },
-       "stdout_stage-in": {
-   INFO Final process status is success
-           "location": "file:///calrissian/output-data/stdout_stage-in.txt",
-           "basename": "stdout_stage-in.txt",
-           "class": "File",
-           "checksum": "sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709",
-           "size": 0,
-           "path": "/calrissian/output-data/stdout_stage-in.txt"
-       },
-       "stdout_stage-out": {
-           "location": "file:///calrissian/output-data/stdout_stage-out.txt",
-           "basename": "stdout_stage-out.txt",
-           "class": "File",
-           "checksum": "sha1$3d21e822ba163b0b862416dba7b285819330b2f5",
-           "size": 3058,
-           "path": "/calrissian/output-data/stdout_stage-out.txt"
+           "checksum": "sha1$1e07a567218c77e7b180e996acf38a35910e9cdb",
+           "size": 1202,
+           "path": "/calrissian/output-data/stage_out-stdout.txt"
        }
    }
+   INFO Final process status is success
+   CALRISSIAN_DELETE_PODS=(<class 'str'>)
+   returning True
+   Starting Cleanup
+   Finishing Cleanup
    ```
 
    Additionally, note the jobs and pods that were created by Calrissian as a result
@@ -598,7 +991,7 @@ workflows and their composite steps as K8s jobs.
 1. Once the workflow execution is done, you can copy over the STDOUT/STDERR logs and
    output files. In one terminal window run:
    ```
-   kubectl --namespace="$NAMESPACE_NAME" create -f AccessVolumes.yaml
+   kubectl --namespace="$NAMESPACE_NAME" create -f k8s/AccessVolumes.yaml
    ```
 
    Then copy out the output-data directory through this pod:
@@ -606,33 +999,29 @@ workflows and their composite steps as K8s jobs.
    NAMESPACE_NAME=dev
    kubectl --namespace="$NAMESPACE_NAME" cp access-pv:/calrissian/output-data output-data
    ```
-1. Verify that the`dumby-product-20210622191038567000` dataset directory exists in the output-data directory:
+1. Verify that the`LC80650452017120LGN00_BQA_downsampled` dataset directory exists in the output-data directory:
    ```
-   ls -ltr output-data/dumby-product-20210622191038567000/
+   ls -ltr output-data/LC80650452017120LGN00_BQA_downsampled/
    ```
 
    Output should look similar to this:
    ```
-   total 10608
-   -rw-r--r--  1 gmanipon  staff  2477207 Oct 13 13:33 dumby-product-20210622191038567000.browse.png
-   -rw-r--r--  1 gmanipon  staff    80019 Oct 13 13:33 dumby-product-20210622191038567000.browse_small.png
-   -rw-r--r--  1 gmanipon  staff        2 Oct 13 13:33 dumby-product-20210622191038567000.dataset.json
-   -rw-r--r--  1 gmanipon  staff      189 Oct 13 13:33 dumby-product-20210622191038567000.met.json
-   -rw-r--r--  1 gmanipon  staff  2861879 Oct 13 13:33 LC80101172015002LGN00_BQA.TIF
+   total 160
+   -rw-r--r--  1 gmanipon  staff  20777 Feb 18 18:03 LC80650452017120LGN00_BQA_downsampled.TIF
+   -rw-r--r--  1 gmanipon  staff   3008 Feb 18 18:03 LC80650452017120LGN00_BQA_downsampled.met.json
+   -rw-r--r--  1 gmanipon  staff  49848 Feb 18 18:03 LC80650452017120LGN00_BQA_downsampled.browse.png
    ```
 
    and was staged to the S3 bucket location:
    ```
-   aws s3 ls $(grep workflow_base_dataset_url baseline-pge-workflow-job.yml | awk '{print $2}')/$(grep workflow_product_id baseline-pge-workflow-job.yml | awk '{print $2}')/
+   aws s3 ls $(grep base_dataset_url stage_out-inputs.yml | awk '{print $2}')/$(grep path stage_out-inputs.yml | awk '{print $2}')/
    ```
 
    Output should look similar to this:
    ```
-   2021-10-13 13:32:49    2861879 LC80101172015002LGN00_BQA.TIF
-   2021-10-13 13:32:49    2477207 dumby-product-20210622191038567000.browse.png
-   2021-10-13 13:32:49      80019 dumby-product-20210622191038567000.browse_small.png
-   2021-10-13 13:32:49          2 dumby-product-20210622191038567000.dataset.json
-   2021-10-13 13:32:49        189 dumby-product-20210622191038567000.met.json
+   2022-02-18 16:46:44      20777 LC80650452017120LGN00_BQA_downsampled.TIF
+   2022-02-18 16:46:44      49848 LC80650452017120LGN00_BQA_downsampled.browse.png
+   2022-02-18 16:46:44       3008 LC80650452017120LGN00_BQA_downsampled.met.json
    ```
 
 ### K8s Caveats
