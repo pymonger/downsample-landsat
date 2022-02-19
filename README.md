@@ -2,12 +2,14 @@
 Example CWL workflow calling a papermilled notebook.
 
 ## Running Jupyter Lab
-```
-git clone https://github.com/pymonger/downsample-landsat.git
-cd downsample-landsat
-docker run -p 8888:8888 -v ${PWD}:/home/jovyan/downsample-landsat \
-  pymonger/downsample-landsat:latest jupyter lab
-```
+1. Start up Jupyter Lab in a docker container:
+   ```
+   git clone https://github.com/pymonger/downsample-landsat.git
+   cd downsample-landsat
+   docker run -p 8888:8888 -v ${PWD}:/home/jovyan/downsample-landsat \
+     pymonger/downsample-landsat:latest jupyter lab
+   ```
+1. Open the `downsample_landsat.ipynb` notebook and run it.
 
 ## Running cwltool
 
