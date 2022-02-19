@@ -1,7 +1,7 @@
 # downsample-landsat
 Example CWL workflow calling a papermilled notebook.
 
-## Running Jupyter Lab
+## Run Jupyter Lab to view, edit and/or execute the algorithm notebook:
 1. Start up Jupyter Lab in a docker container:
    ```
    git clone https://github.com/pymonger/downsample-landsat.git
