@@ -149,48 +149,48 @@ Building off of the previous dowsample_landsat example:
    Output should look similar to this:
 
    ```
-   INFO /Users/pymonger/dev/downsample-landsat/env/bin/cwltool 3.1.20220117131913
-   INFO Resolved 'stage_out.cwl' to 'file:///Users/pymonger/dev/downsample-landsat/stage_out.cwl'
+   INFO /Users/gmanipon/dev/hello-world/env/bin/cwl-runner 3.1.20220117131913
+   INFO Resolved 'stage_out.cwl' to 'file:///Users/gmanipon/dev/downsample-landsat/stage_out.cwl'
    stage_out.cwl:8:3: Warning: checking item
                       Warning:   Field `class` contains undefined reference to
                       `http://commonwl.org/cwltool#Secrets`
    INFO stage_out.cwl:8:3: Unknown hint http://commonwl.org/cwltool#Secrets
-   INFO [job stage_out.cwl] /private/tmp/docker_tmp9qh_b9au$ docker \
+   INFO [job stage_out.cwl] /private/tmp/docker_tmpmd94esqb$ docker \
        run \
        -i \
-       --mount=type=bind,source=/private/tmp/docker_tmp9qh_b9au,target=/nnlHtP \
-       --mount=type=bind,source=/private/tmp/docker_tmpubyc67dk,target=/tmp \
-       --mount=type=bind,source=/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled,target=/var/lib/cwl/stgfe3b1207-71f3-41a4-ba09-c6fbc1bfd8e7/LC80650452017120LGN00_BQA_downsampled,readonly \
-       --workdir=/nnlHtP \
+       --mount=type=bind,source=/private/tmp/docker_tmpmd94esqb,target=/JZJjRa \
+       --mount=type=bind,source=/private/tmp/docker_tmpavpielz1,target=/tmp \
+       --mount=type=bind,source=/Users/gmanipon/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled,target=/var/lib/cwl/stg7368e2ad-b784-4fda-8bab-5384a7d04630/LC80650452017120LGN00_BQA_downsampled,readonly \
+       --workdir=/JZJjRa \
        --read-only=true \
        --log-driver=none \
        --user=503:20 \
        --rm \
-       --cidfile=/private/tmp/docker_tmpgejedl8z/20220218160324-178256.cid \
+       --cidfile=/private/tmp/docker_tmpjwe6mvnw/20220218162549-534126.cid \
        --env=TMPDIR=/tmp \
-       --env=HOME=/nnlHtP \
+       --env=HOME=/JZJjRa \
        pymonger/aws-cli \
        sh \
        -c \
-       'if [ ! -d $HOME/.aws ]; then cp -rp .aws $HOME/; fi && aws s3 cp --recursive /var/lib/cwl/stgfe3b1207-71f3-41a4-ba09-c6fbc1bfd8e7/LC80650452017120LGN00_BQA_downsampled s3://hysds-dataset-bucket-gman-test/test/LC80650452017120LGN00_BQA_downsampled' > /private/tmp/docker_tmp9qh_b9au/stage_out-stdout.txt 2> /private/tmp/docker_tmp9qh_b9au/stage_out-stderr.txt
-   INFO [job stage_out.cwl] Max memory used: 678MiB
+       'if [ ! -d $HOME/.aws ]; then cp -rp .aws $HOME/; fi && aws s3 cp --recursive /var/lib/cwl/stg7368e2ad-b784-4fda-8bab-5384a7d04630/LC80650452017120LGN00_BQA_downsampled s3://hysds-dataset-bucket-gman-test/test/LC80650452017120LGN00_BQA_downsampled' > /private/tmp/docker_tmpmd94esqb/stage_out-stdout.txt 2> /private/tmp/docker_tmpmd94esqb/stage_out-stderr.txt
+   INFO [job stage_out.cwl] Max memory used: 347MiB
    INFO [job stage_out.cwl] completed success
-   {   
+   {
        "stderr_file": {
-           "location": "file:///Users/pymonger/dev/downsample-landsat/stage_out-stderr.txt",
+           "location": "file:///Users/gmanipon/dev/downsample-landsat/stage_out-stderr.txt",
            "basename": "stage_out-stderr.txt",
            "class": "File",
            "checksum": "sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709",
            "size": 0,
-           "path": "/Users/pymonger/dev/downsample-landsat/stage_out-stderr.txt"
+           "path": "/Users/gmanipon/dev/downsample-landsat/stage_out-stderr.txt"
        },
        "stdout_file": {
-           "location": "file:///Users/pymonger/dev/downsample-landsat/stage_out-stdout.txt",
+           "location": "file:///Users/gmanipon/dev/downsample-landsat/stage_out-stdout.txt",
            "basename": "stage_out-stdout.txt",
            "class": "File",
-           "checksum": "sha1$d88463d7e25ff6903a785798d1e5141204655895",
+           "checksum": "sha1$73d3553afef8e2741dcfd74e2629f742d9ebac82",
            "size": 1151,
-           "path": "/Users/pymonger/dev/downsample-landsat/stage_out-stdout.txt"
+           "path": "/Users/gmanipon/dev/downsample-landsat/stage_out-stdout.txt"
        }
    }
    INFO Final process status is success
@@ -203,9 +203,9 @@ Building off of the previous dowsample_landsat example:
 
    Output should look similar to this:
    ```
-   2022-02-18 16:03:28      20777 LC80650452017120LGN00_BQA_downsampled.TIF
-   2022-02-18 16:03:28      49848 LC80650452017120LGN00_BQA_downsampled.browse.png
-   2022-02-18 16:03:28       3008 LC80650452017120LGN00_BQA_downsampled.met.json
+   2022-02-18 16:25:52      20777 LC80650452017120LGN00_BQA_downsampled.TIF
+   2022-02-18 16:25:52      49848 LC80650452017120LGN00_BQA_downsampled.browse.png
+   2022-02-18 16:25:52       3008 LC80650452017120LGN00_BQA_downsampled.met.json
    ```
 
 ## Building Container Image
