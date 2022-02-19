@@ -222,7 +222,10 @@ Building off of the previous dowsample_landsat example:
 
 ### Run 2-step workflow (downsample_landsat & stage_out) example
 Now that we've seen the individual steps at work, we can proceed with running them in 
-a CWL workflow.
+a CWL workflow. The following image depicts the graph visualiation (dot) of the
+DAG workflow.
+
+![workflow](images/workflow.png?raw=true "workflow")
 
 1. Clean out any artifacts that were left as a result of running the previous examples:
    ```
