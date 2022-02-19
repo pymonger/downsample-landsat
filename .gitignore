@@ -135,3 +135,4 @@ LC8*_downsampled
 output_nb.ipynb
 *.tmp
 stage_out-inputs.yml
+workflow-inputs.yml
