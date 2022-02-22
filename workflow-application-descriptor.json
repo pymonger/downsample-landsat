@@ -46,6 +46,6 @@
     },
     "immediateDeployment": true,
     "executionUnit": [{
-        "href": "docker://pymonger/downsample-landsat:latest"
+        "href": "docker://pymonger/downsample-landsat:1.0.0"
     }]
 }
