@@ -2,7 +2,7 @@
     "processDescription": {
         "process": {
             "id": "downsample-landsat-workflow",
-            "title": "Baseline PGE",
+            "title": "Downsample Landsat",
             "owsContext": {
                 "offering": {
                     "content": {
