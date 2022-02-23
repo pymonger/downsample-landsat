@@ -13,9 +13,10 @@ Example CWL workflow calling a papermilled notebook.
 
 ## Building the container image
 ```
+pip install jupyter-repo2docker
 git clone https://github.com/pymonger/downsample-landsat.git
 cd downsample-landsat
-docker build --rm --force-rm -t pymonger/downsample-landsat:latest -f Dockerfile .
+repo2docker --image-name pymonger/downsample-landsat:latest .
 ```
 
 ## Running cwltool
