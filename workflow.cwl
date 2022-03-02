@@ -37,10 +37,20 @@ outputs:
 
 steps:
 
+  stage_in:
+    run: stage_in.cwl
+    in:
+      input_url: workflow_input_url
+    out:
+      - output_nb_file
+      - image_file
+      - stdout_file
+      - stderr_file
+
   downsample_landsat:
     run: downsample_landsat.cwl
     in:
-      input_url: workflow_input_url
+      input_file: stage_in/image_file
       min_spin_time: workflow_min_spin_time
       max_spin_time: workflow_max_spin_time
     out:

@@ -4,25 +4,26 @@ cwlVersion: v1.1
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: 'pymonger/downsample-landsat:1.0.0'
+    dockerPull: 'pymonger/downsample-landsat:2.0.0'
 baseCommand:
   - papermill
   - /home/jovyan/downsample-landsat/downsample_landsat.ipynb
   - output_nb.ipynb
 requirements:
   ShellCommandRequirement: {}
-  NetworkAccess:
-    networkAccess: true
+  InitialWorkDirRequirement:
+    listing: 
+      - $(inputs.input_file)
 
 inputs:
-  input_url:
-    type: string
+  input_file:
+    type: File
     inputBinding:
       position: 1
       shellQuote: false
       prefix: '--parameters'
       valueFrom: |
-        input_url "$(self)"
+        input_file "$(self.basename)"
   min_spin_time:
     type: int
     inputBinding:

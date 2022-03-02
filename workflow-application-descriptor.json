@@ -36,7 +36,7 @@
                 }
             }]
         },
-        "processVersion": "1.0.0",
+        "processVersion": "2.0.0",
         "jobControlOptions": [
             "async-execute"
         ],
@@ -46,6 +46,6 @@
     },
     "immediateDeployment": true,
     "executionUnit": [{
-        "href": "docker://pymonger/downsample-landsat:1.0.0"
+        "href": "docker://pymonger/downsample-landsat:2.0.0"
     }]
 }
