@@ -572,6 +572,13 @@ workflows and their composite steps as K8s jobs.
    ```
    kubectl --namespace="$NAMESPACE_NAME" create -f k8s/eks/VolumeClaims.yaml
    ```
+
+   If your K8s cluster is configured with the `longhorn` storage class,
+   see the longhorn caveat below to create PersistentVolumeClaims backed 
+   by that storage class to support `ReadWriteMany` and run this afterwards:
+   ```
+   kubectl --namespace="$NAMESPACE_NAME" create -f k8s/longhorn/VolumeClaims.yaml
+   ```
 1. Run the workflow:
    ```
    kubectl --namespace="$NAMESPACE_NAME" create -f k8s/CalrissianJob.yaml
@@ -693,4 +700,15 @@ https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html
 Continue with step 5 above but instead use the `k8s/eks/VolumeClaims.yaml` instead:
 ```
 kubectl --namespace="$NAMESPACE_NAME" create -f k8s/eks/VolumeClaims.yaml
+```
+
+#### Longhorn
+
+The `longhorn` storage class (https://longhorn.io/) is a third-party Kubernetes 
+plugin that provides persistent storage with `ReadWriteMany` which is required 
+by Calrissian.
+
+Continue with step 5 above but instead use the `k8s/longhorn/VolumeClaims.yaml` instead:
+```
+kubectl --namespace="$NAMESPACE_NAME" create -f k8s/longhorn/VolumeClaims.yaml
 ```
