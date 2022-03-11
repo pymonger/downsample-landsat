@@ -6,7 +6,7 @@
             "owsContext": {
                 "offering": {
                     "content": {
-                        "href": "https://raw.githubusercontent.com/pymonger/downsample-landsat/test-aks/workflow.cwl"
+                        "href": "https://raw.githubusercontent.com/pymonger/downsample-landsat/test-aks2/workflow.cwl"
                     }
                 }
             },
