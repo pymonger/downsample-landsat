@@ -50,9 +50,9 @@ outputs:
     type: Directory
     outputBinding:
       glob: '*_downsampled'
-  stdout_file:
-    type: stdout
-  stderr_file:
-    type: stderr
-stdout: downsample_landsat-stdout.txt
-stderr: downsample_landsat-stderr.txt
+#  stdout_file:
+#    type: stdout
+#  stderr_file:
+#    type: stderr
+#stdout: downsample_landsat-stdout.txt
+#stderr: downsample_landsat-stderr.txt

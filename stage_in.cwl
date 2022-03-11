@@ -33,9 +33,9 @@ outputs:
     type: File
     outputBinding:
       glob: 'LC*.TIF'
-  stdout_file:
-    type: stdout
-  stderr_file:
-    type: stderr
-stdout: stage_in-stdout.txt
-stderr: stage_in-stderr.txt
+#  stdout_file:
+#    type: stdout
+#  stderr_file:
+#    type: stderr
+#stdout: stage_in-stdout.txt
+#stderr: stage_in-stderr.txt

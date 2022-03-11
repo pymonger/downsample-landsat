@@ -22,18 +22,18 @@ outputs:
   final_dataset_dir:
     type: Directory
     outputSource: downsample_landsat/dataset_dir
-  stdout-downsample_landsat:
-    type: File
-    outputSource: downsample_landsat/stdout_file
-  stderr-downsample_landsat:
-    type: File
-    outputSource: downsample_landsat/stderr_file
-  stdout-stage_out:
-    type: File
-    outputSource: stage_out/stdout_file
-  stderr-stage_out:
-    type: File
-    outputSource: stage_out/stderr_file
+#  stdout-downsample_landsat:
+#    type: File
+#    outputSource: downsample_landsat/stdout_file
+#  stderr-downsample_landsat:
+#    type: File
+#    outputSource: downsample_landsat/stderr_file
+#  stdout-stage_out:
+#    type: File
+#    outputSource: stage_out/stdout_file
+#  stderr-stage_out:
+#    type: File
+#    outputSource: stage_out/stderr_file
 
 steps:
 
@@ -44,8 +44,8 @@ steps:
     out:
       - output_nb_file
       - image_file
-      - stdout_file
-      - stderr_file
+#      - stdout_file
+#      - stderr_file
 
   downsample_landsat:
     run: downsample_landsat.cwl
@@ -56,8 +56,8 @@ steps:
     out:
       - output_nb_file
       - dataset_dir
-      - stdout_file
-      - stderr_file
+#      - stdout_file
+#      - stderr_file
 
   stage_out:
     run: stage_out.cwl
@@ -66,6 +66,7 @@ steps:
       aws_secret_access_key: workflow_aws_secret_access_key
       dataset_dir: downsample_landsat/dataset_dir
       base_dataset_url: workflow_base_dataset_url
-    out:
-      - stdout_file
-      - stderr_file
+    out: []
+#    out:
+#      - stdout_file
+#      - stderr_file
