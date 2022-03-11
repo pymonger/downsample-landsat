@@ -13,6 +13,9 @@ requirements:
   ShellCommandRequirement: {}
   NetworkAccess:
     networkAccess: true
+  EnvVarRequirement:
+    envDef:
+      JUPYTER_ALLOW_INSECURE_WRITES: 1
 
 inputs:
   input_url:

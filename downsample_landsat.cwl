@@ -14,6 +14,9 @@ requirements:
   InitialWorkDirRequirement:
     listing: 
       - $(inputs.input_file)
+  EnvVarRequirement:
+    envDef:
+      JUPYTER_ALLOW_INSECURE_WRITES: 1
 
 inputs:
   input_file:
