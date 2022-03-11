@@ -8,7 +8,7 @@ RUN set -ex \
   && apt-get update -y \
   && apt-get upgrade -y \
   && apt-get install -y git imagemagick gdal-bin \
-  && pip install papermill
+  && pip install papermill black
 
 USER $NB_USER
 
