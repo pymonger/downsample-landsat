@@ -32,7 +32,7 @@ spec:
           - "/calrissian/output-data/docker-usage.json"
           - "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl"
           - "--workflow_input_url"
-          - "https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF"
+          - "https://s3-us-west-2.amazonaws.com/landsat-pds/c1/L8/065/045/LC08_L1TP_065045_20210714_20210721_01_T1/LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF"
           - "--workflow_min_spin_time"
           - "15"
           - "--workflow_max_spin_time"

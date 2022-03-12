@@ -1,5 +1,5 @@
 input_file:
   class: File
-  path: "LC80650452017120LGN00_BQA.TIF"
+  path: "LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF"
 min_spin_time: 20
 max_spin_time: 40

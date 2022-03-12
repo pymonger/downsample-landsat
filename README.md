@@ -66,17 +66,17 @@ repo2docker --user-id 1000 --user-name jovyan \
        pymonger/downsample-landsat:2.0.0 \
        /bin/sh \
        -c \
-       papermill /home/jovyan/downsample-landsat/stage_in.ipynb output_nb.ipynb --parameters input_url "https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF" > /private/tmp/docker_tmp24xdxpjo/stage_in-stdout.txt 2> /private/tmp/docker_tmp24xdxpjo/stage_in-stderr.txt
+       papermill /home/jovyan/downsample-landsat/stage_in.ipynb output_nb.ipynb --parameters input_url "https://s3-us-west-2.amazonaws.com/landsat-pds/c1/L8/065/045/LC08_L1TP_065045_20210714_20210721_01_T1/LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF" > /private/tmp/docker_tmp24xdxpjo/stage_in-stdout.txt 2> /private/tmp/docker_tmp24xdxpjo/stage_in-stderr.txt
    INFO [job stage_in.cwl] Max memory used: 2054MiB
    INFO [job stage_in.cwl] completed success
    {
        "image_file": {
-           "location": "file:///Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA.TIF",
-           "basename": "LC80650452017120LGN00_BQA.TIF",
+           "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF",
+           "basename": "LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF",
            "class": "File",
            "checksum": "sha1$433786a60356cfef0d99c24144db98eb79686a37",
            "size": 1997366,
-           "path": "/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA.TIF"
+           "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF"
        },
        "output_nb_file": {
            "location": "file:///Users/pymonger/dev/downsample-landsat/output_nb.ipynb",
@@ -105,20 +105,20 @@ repo2docker --user-id 1000 --user-name jovyan \
    }
    INFO Final process status is success
    ```
-1. Verify that the `LC80650452017120LGN00_BQA.TIF` image file was created:
+1. Verify that the `LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF` image file was created:
    ```
-   ls -ltr LC80650452017120LGN00_BQA.TIF
+   ls -ltr LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF
    ```
 
    Output should look similar to this:
    ``` 
-   -rw-r--r--  1 pymonger  wheel  1997366 Mar  2 12:56 LC80650452017120LGN00_BQA.TIF
+   -rw-r--r--  1 pymonger  wheel  1997366 Mar  2 12:56 LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF
    ```
-   You can visualize the `LC80650452017120LGN00_BQA.TIF` file in QGIS.
+   You can visualize the `LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF` file in QGIS.
 
 ### Run downsample-landsat example
 Building off of the previous stage-in example:
-1. Ensure that the `LC80650452017120LGN00_BQA.TIF` image file exists.
+1. Ensure that the `LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF` image file exists.
    If not, run the `stage-in` example above.
 1. Run cwltool (to run singularity instead of docker, add `--singularity` option):
    ```
@@ -135,7 +135,7 @@ Building off of the previous stage-in example:
        -i \
        --mount=type=bind,source=/private/tmp/docker_tmpr5ebt491,target=/tpDYGB \
        --mount=type=bind,source=/private/tmp/docker_tmp2n4bly9w,target=/tmp \
-       --mount=type=bind,source=/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA.TIF,target=/tpDYGB/LC80650452017120LGN00_BQA.TIF,readonly \
+       --mount=type=bind,source=/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF,target=/tpDYGB/LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF,readonly \
        --workdir=/tpDYGB \
        --net=none \
        --log-driver=none \
@@ -146,41 +146,41 @@ Building off of the previous stage-in example:
        pymonger/downsample-landsat:2.0.0 \
        /bin/sh \
        -c \
-       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC80650452017120LGN00_BQA.TIF" --parameters min_spin_time "20" --parameters max_spin_time "40" > /private/tmp/docker_tmpr5ebt491/downsample_landsat-stdout.txt 2> /private/tmp/docker_tmpr5ebt491/downsample_landsat-stderr.txt
+       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF" --parameters min_spin_time "20" --parameters max_spin_time "40" > /private/tmp/docker_tmpr5ebt491/downsample_landsat-stdout.txt 2> /private/tmp/docker_tmpr5ebt491/downsample_landsat-stderr.txt
    INFO [job downsample_landsat.cwl] Max memory used: 1952MiB
    INFO [job downsample_landsat.cwl] completed success
    {
        "dataset_dir": {
-           "location": "file:///Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled",
-           "basename": "LC80650452017120LGN00_BQA_downsampled",
+           "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled",
+           "basename": "LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled",
            "class": "Directory",
            "listing": [
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.met.json",
-                   "basename": "LC80650452017120LGN00_BQA_downsampled.met.json",
+                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.met.json",
+                   "basename": "LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.met.json",
                    "checksum": "sha1$9ef1fba7adf92279482c9dfdc3a8ae5d95aa7f70",
                    "size": 3116,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.met.json"
+                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.met.json"
                },
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.TIF",
-                   "basename": "LC80650452017120LGN00_BQA_downsampled.TIF",
+                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.TIF",
+                   "basename": "LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.TIF",
                    "checksum": "sha1$57267ecbe6d1a4cbfd0c547829238953fae27b8f",
                    "size": 20777,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.TIF"
+                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.TIF"
                },
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.browse.png",
-                   "basename": "LC80650452017120LGN00_BQA_downsampled.browse.png",
+                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.browse.png",
+                   "basename": "LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.browse.png",
                    "checksum": "sha1$4b5ff3f42615abf50ffed9b0cc32b9f23a9e6e23",
                    "size": 50629,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.browse.png"
+                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.browse.png"
                }
            ],
-           "path": "/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled"
+           "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled"
        },
        "output_nb_file": {
            "location": "file:///Users/pymonger/dev/downsample-landsat/output_nb.ipynb",
@@ -209,24 +209,24 @@ Building off of the previous stage-in example:
    }
    INFO Final process status is success
    ```
-1. Verify that the `LC80650452017120LGN00_BQA_downsampled` dataset directory was created:
+1. Verify that the `LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled` dataset directory was created:
    ```
-   ls -ltr LC80650452017120LGN00_BQA_downsampled/
+   ls -ltr LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/
    ```
 
    Output should look similar to this:
    ``` 
    total 160
-   -rw-r--r--  1 pymonger  wheel  20777 Mar  2 13:01 LC80650452017120LGN00_BQA_downsampled.TIF
-   -rw-r--r--  1 pymonger  wheel  50629 Mar  2 13:01 LC80650452017120LGN00_BQA_downsampled.browse.png
-   -rw-r--r--  1 pymonger  wheel   3116 Mar  2 13:01 LC80650452017120LGN00_BQA_downsampled.met.json
+   -rw-r--r--  1 pymonger  wheel  20777 Mar  2 13:01 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.TIF
+   -rw-r--r--  1 pymonger  wheel  50629 Mar  2 13:01 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.browse.png
+   -rw-r--r--  1 pymonger  wheel   3116 Mar  2 13:01 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.met.json
    ```
-   You can visualize the `LC80650452017120LGN00_BQA_downsampled.TIF` file in QGIS.
+   You can visualize the `LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.TIF` file in QGIS.
 
 ### Run stage-out example
 
 Building off of the previous dowsample-landsat example:
-1. Ensure that the `LC80650452017120LGN00_BQA_downsampled` dataset directory exists.
+1. Ensure that the `LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled` dataset directory exists.
    If not, run the `downsample-landsat` example above.
 1. Copy the `stage_out-inputs.yml.tmpl` file to `stage_out-inputs.yml`:
    ```
@@ -262,7 +262,7 @@ Building off of the previous dowsample-landsat example:
        -i \
        --mount=type=bind,source=/private/tmp/docker_tmpqzxwnh2u,target=/rgrrqW \
        --mount=type=bind,source=/private/tmp/docker_tmp24aq06by,target=/tmp \
-       --mount=type=bind,source=/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled,target=/var/lib/cwl/stg3401acae-259c-499b-8f12-16681fa3541c/LC80650452017120LGN00_BQA_downsampled,readonly \
+       --mount=type=bind,source=/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled,target=/var/lib/cwl/stg3401acae-259c-499b-8f12-16681fa3541c/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled,readonly \
        --workdir=/rgrrqW \
        --read-only=true \
        --log-driver=none \
@@ -274,7 +274,7 @@ Building off of the previous dowsample-landsat example:
        pymonger/aws-cli \
        sh \
        -c \
-       'if [ ! -d $HOME/.aws ]; then cp -rp .aws $HOME/; fi && aws s3 cp --recursive /var/lib/cwl/stg3401acae-259c-499b-8f12-16681fa3541c/LC80650452017120LGN00_BQA_downsampled s3://hysds-dataset-bucket-gman-test/test/LC80650452017120LGN00_BQA_downsampled' > /private/tmp/docker_tmpqzxwnh2u/stage_out-stdout.txt 2> /private/tmp/docker_tmpqzxwnh2u/stage_out-stderr.txt
+       'if [ ! -d $HOME/.aws ]; then cp -rp .aws $HOME/; fi && aws s3 cp --recursive /var/lib/cwl/stg3401acae-259c-499b-8f12-16681fa3541c/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled' > /private/tmp/docker_tmpqzxwnh2u/stage_out-stdout.txt 2> /private/tmp/docker_tmpqzxwnh2u/stage_out-stderr.txt
    INFO [job stage_out.cwl] Max memory used: 465MiB
    INFO [job stage_out.cwl] completed success
    {
@@ -297,7 +297,7 @@ Building off of the previous dowsample-landsat example:
    }
    INFO Final process status is success
    ```
-1. Verify that the`LC80650452017120LGN00_BQA_downsampled` dataset directory was staged to the 
+1. Verify that the`LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled` dataset directory was staged to the 
    S3 bucket location.
    ```
    aws s3 ls $(grep base_dataset_url stage_out-inputs.yml | awk '{print $2}')/$(grep path stage_out-inputs.yml | awk '{print $2}')/
@@ -305,9 +305,9 @@ Building off of the previous dowsample-landsat example:
 
    Output should look similar to this:
    ```
-   2022-02-18 16:25:52      20777 LC80650452017120LGN00_BQA_downsampled.TIF
-   2022-02-18 16:25:52      49848 LC80650452017120LGN00_BQA_downsampled.browse.png
-   2022-02-18 16:25:52       3008 LC80650452017120LGN00_BQA_downsampled.met.json
+   2022-02-18 16:25:52      20777 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.TIF
+   2022-02-18 16:25:52      49848 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.browse.png
+   2022-02-18 16:25:52       3008 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.met.json
    ```
 
 ### Run 3-step workflow (stage-in, downsample-landsat & stage-out) example
@@ -319,7 +319,7 @@ DAG workflow.
 
 1. Clean out any artifacts that were left as a result of running the previous examples:
    ```
-   rm -rf LC80650452017120LGN00_BQA_downsampled *-stderr.txt *-stdout.txt output_nb.ipynb
+   rm -rf LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled *-stderr.txt *-stdout.txt output_nb.ipynb
    ```
 1. Copy the `workflow-inputs.yml.tmpl` file to `workflow-inputs.yml`:
    ```
@@ -371,7 +371,7 @@ DAG workflow.
        pymonger/downsample-landsat:2.0.0 \
        /bin/sh \
        -c \
-       papermill /home/jovyan/downsample-landsat/stage_in.ipynb output_nb.ipynb --parameters input_url "https://s3-us-west-2.amazonaws.com/landsat-pds/L8/065/045/LC80650452017120LGN00/LC80650452017120LGN00_BQA.TIF" > /private/tmp/docker_tmp1p7p0v4a/stage_in-stdout.txt 2> /private/tmp/docker_tmp1p7p0v4a/stage_in-stderr.txt
+       papermill /home/jovyan/downsample-landsat/stage_in.ipynb output_nb.ipynb --parameters input_url "https://s3-us-west-2.amazonaws.com/landsat-pds/c1/L8/065/045/LC08_L1TP_065045_20210714_20210721_01_T1/LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF" > /private/tmp/docker_tmp1p7p0v4a/stage_in-stdout.txt 2> /private/tmp/docker_tmp1p7p0v4a/stage_in-stderr.txt
    INFO [job stage_in] Max memory used: 2044MiB
    INFO [job stage_in] completed success
    INFO [step stage_in] completed success
@@ -382,7 +382,7 @@ DAG workflow.
        -i \
        --mount=type=bind,source=/private/tmp/docker_tmpuxqihtw3,target=/sFjOOZ \
        --mount=type=bind,source=/private/tmp/docker_tmpcrwdoigw,target=/tmp \
-       --mount=type=bind,source=/private/tmp/docker_tmp1p7p0v4a/LC80650452017120LGN00_BQA.TIF,target=/sFjOOZ/LC80650452017120LGN00_BQA.TIF,readonly \
+       --mount=type=bind,source=/private/tmp/docker_tmp1p7p0v4a/LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF,target=/sFjOOZ/LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF,readonly \
        --workdir=/sFjOOZ \
        --net=none \
        --log-driver=none \
@@ -393,7 +393,7 @@ DAG workflow.
        pymonger/downsample-landsat:2.0.0 \
        /bin/sh \
        -c \
-       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC80650452017120LGN00_BQA.TIF" --parameters min_spin_time "15" --parameters max_spin_time "30" > /private/tmp/docker_tmpuxqihtw3/downsample_landsat-stdout.txt 2> /private/tmp/docker_tmpuxqihtw3/downsample_landsat-stderr.txt
+       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF" --parameters min_spin_time "15" --parameters max_spin_time "30" > /private/tmp/docker_tmpuxqihtw3/downsample_landsat-stdout.txt 2> /private/tmp/docker_tmpuxqihtw3/downsample_landsat-stderr.txt
    INFO [job downsample_landsat] Max memory used: 1975MiB
    INFO [job downsample_landsat] completed success
    INFO [step downsample_landsat] completed success
@@ -404,7 +404,7 @@ DAG workflow.
        -i \
        --mount=type=bind,source=/private/tmp/docker_tmp6awts2g8,target=/sFjOOZ \
        --mount=type=bind,source=/private/tmp/docker_tmphuv499r8,target=/tmp \
-       --mount=type=bind,source=/private/tmp/docker_tmpuxqihtw3/LC80650452017120LGN00_BQA_downsampled,target=/var/lib/cwl/stgd93000df-dfa3-494a-884f-22232ee34400/LC80650452017120LGN00_BQA_downsampled,readonly \
+       --mount=type=bind,source=/private/tmp/docker_tmpuxqihtw3/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled,target=/var/lib/cwl/stgd93000df-dfa3-494a-884f-22232ee34400/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled,readonly \
        --workdir=/sFjOOZ \
        --log-driver=none \
        --rm \
@@ -414,43 +414,43 @@ DAG workflow.
        pymonger/aws-cli \
        sh \
        -c \
-       'if [ ! -d $HOME/.aws ]; then cp -rp .aws $HOME/; fi && aws s3 cp --recursive /var/lib/cwl/stgd93000df-dfa3-494a-884f-22232ee34400/LC80650452017120LGN00_BQA_downsampled s3://hysds-dataset-bucket-gman-test/docker_on_desktop_k8s/LC80650452017120LGN00_BQA_downsampled' > /private/tmp/docker_tmp6awts2g8/stage_out-stdout.txt 2> /private/tmp/docker_tmp6awts2g8/stage_out-stderr.txt
+       'if [ ! -d $HOME/.aws ]; then cp -rp .aws $HOME/; fi && aws s3 cp --recursive /var/lib/cwl/stgd93000df-dfa3-494a-884f-22232ee34400/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled s3://hysds-dataset-bucket-gman-test/docker_on_desktop_k8s/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled' > /private/tmp/docker_tmp6awts2g8/stage_out-stdout.txt 2> /private/tmp/docker_tmp6awts2g8/stage_out-stderr.txt
    INFO [job stage_out] Max memory used: 570MiB
    INFO [job stage_out] completed success
    INFO [step stage_out] completed success
    INFO [workflow ] completed success
    {
        "final_dataset_dir": {
-           "location": "file:///Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled",
-           "basename": "LC80650452017120LGN00_BQA_downsampled",
+           "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled",
+           "basename": "LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled",
            "class": "Directory",
            "listing": [
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.met.json",
-                   "basename": "LC80650452017120LGN00_BQA_downsampled.met.json",
+                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.met.json",
+                   "basename": "LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.met.json",
                    "checksum": "sha1$9ef1fba7adf92279482c9dfdc3a8ae5d95aa7f70",
                    "size": 3116,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.met.json"
+                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.met.json"
                },
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.TIF",
-                   "basename": "LC80650452017120LGN00_BQA_downsampled.TIF",
+                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.TIF",
+                   "basename": "LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.TIF",
                    "checksum": "sha1$57267ecbe6d1a4cbfd0c547829238953fae27b8f",
                    "size": 20777,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.TIF"
+                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.TIF"
                },
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.browse.png",
-                   "basename": "LC80650452017120LGN00_BQA_downsampled.browse.png",
+                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.browse.png",
+                   "basename": "LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.browse.png",
                    "checksum": "sha1$d526be0fb6ba45341b9847879410a97461cf5309",
                    "size": 50629,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled/LC80650452017120LGN00_BQA_downsampled.browse.png"
+                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.browse.png"
                }
            ],
-           "path": "/Users/pymonger/dev/downsample-landsat/LC80650452017120LGN00_BQA_downsampled"
+           "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled"
        },
        "stderr-downsample_landsat": {
            "location": "file:///Users/pymonger/dev/downsample-landsat/downsample_landsat-stderr.txt",
@@ -487,17 +487,17 @@ DAG workflow.
    }
    INFO Final process status is success
    ```
-1. Verify that the `LC80650452017120LGN00_BQA_downsampled` dataset directory exists locally:
+1. Verify that the `LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled` dataset directory exists locally:
    ```
-   ls -ltr LC80650452017120LGN00_BQA_downsampled/
+   ls -ltr LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/
    ```
 
    Output should look similar to this:
    ```
    total 160
-   -rw-r--r--  1 pymonger  wheel  20777 Mar  2 13:11 LC80650452017120LGN00_BQA_downsampled.TIF
-   -rw-r--r--  1 pymonger  wheel  50629 Mar  2 13:11 LC80650452017120LGN00_BQA_downsampled.browse.png
-   -rw-r--r--  1 pymonger  wheel   3116 Mar  2 13:11 LC80650452017120LGN00_BQA_downsampled.met.json
+   -rw-r--r--  1 pymonger  wheel  20777 Mar  2 13:11 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.TIF
+   -rw-r--r--  1 pymonger  wheel  50629 Mar  2 13:11 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.browse.png
+   -rw-r--r--  1 pymonger  wheel   3116 Mar  2 13:11 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.met.json
    ```
 
    and was staged to the S3 bucket location:
@@ -507,9 +507,9 @@ DAG workflow.
 
    Output should look similar to this:
    ```
-   2022-02-18 16:34:47      20777 LC80650452017120LGN00_BQA_downsampled.TIF
-   2022-02-18 16:34:47      49848 LC80650452017120LGN00_BQA_downsampled.browse.png
-   2022-02-18 16:34:47       3008 LC80650452017120LGN00_BQA_downsampled.met.json
+   2022-02-18 16:34:47      20777 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.TIF
+   2022-02-18 16:34:47      49848 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.browse.png
+   2022-02-18 16:34:47       3008 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.met.json
    ```
 
 ## Running calrissian
@@ -528,7 +528,7 @@ workflows and their composite steps as K8s jobs.
 
 1. Clean out any artifacts that were left as a result of running the previous examples:
    ```
-   rm -rf LC80650452017120LGN00_BQA_downsampled *-stderr.txt *-stdout.txt output_nb.ipynb
+   rm -rf LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled *-stderr.txt *-stdout.txt output_nb.ipynb
    ```
 1. Create namespace and roles:
    ```
@@ -606,17 +606,17 @@ workflows and their composite steps as K8s jobs.
    NAMESPACE_NAME=dev
    kubectl --namespace="$NAMESPACE_NAME" cp access-pv:/calrissian/output-data output-data
    ```
-1. Verify that the`LC80650452017120LGN00_BQA_downsampled` dataset directory exists in the output-data directory:
+1. Verify that the`LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled` dataset directory exists in the output-data directory:
    ```
-   ls -ltr output-data/LC80650452017120LGN00_BQA_downsampled/
+   ls -ltr output-data/LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled/
    ```
 
    Output should look similar to this:
    ```
    total 160
-   -rw-r--r--  1 pymonger  staff  20777 Feb 18 18:03 LC80650452017120LGN00_BQA_downsampled.TIF
-   -rw-r--r--  1 pymonger  staff   3008 Feb 18 18:03 LC80650452017120LGN00_BQA_downsampled.met.json
-   -rw-r--r--  1 pymonger  staff  49848 Feb 18 18:03 LC80650452017120LGN00_BQA_downsampled.browse.png
+   -rw-r--r--  1 pymonger  staff  20777 Feb 18 18:03 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.TIF
+   -rw-r--r--  1 pymonger  staff   3008 Feb 18 18:03 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.met.json
+   -rw-r--r--  1 pymonger  staff  49848 Feb 18 18:03 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.browse.png
    ```
 
    and was staged to the S3 bucket location:
@@ -626,9 +626,9 @@ workflows and their composite steps as K8s jobs.
 
    Output should look similar to this:
    ```
-   2022-02-18 16:46:44      20777 LC80650452017120LGN00_BQA_downsampled.TIF
-   2022-02-18 16:46:44      49848 LC80650452017120LGN00_BQA_downsampled.browse.png
-   2022-02-18 16:46:44       3008 LC80650452017120LGN00_BQA_downsampled.met.json
+   2022-02-18 16:46:44      20777 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.TIF
+   2022-02-18 16:46:44      49848 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.browse.png
+   2022-02-18 16:46:44       3008 LC08_L1TP_065045_20210714_20210721_01_T1_BQA_downsampled.met.json
    ```
 
 ### K8s Caveats
@@ -712,3 +712,21 @@ Continue with step 5 above but instead use the `k8s/longhorn/VolumeClaims.yaml` 
 ```
 kubectl --namespace="$NAMESPACE_NAME" create -f k8s/longhorn/VolumeClaims.yaml
 ```
+
+### Landsat 8 Datasets
+
+Per https://www.usgs.gov/landsat-missions/landsat-collections:
+
+> NOTE: Landsat Collection 1 based forward processing ended December 31, 2021. As of 
+> January 1, 2022, all new Landsat acquisitions are processed into the Collection 2
+> inventory structure only. Collection 1 products will remain available for search
+> and download until December 31, 2022. 
+>
+> Users are encouraged to migrate their workflow to Landsat Collection 2 at their
+> earliest convenience. Due to advancements in data processing and algorithm
+> development, users are discouraged from using Collection 1 and Collection 2
+> interchangeably within the same workflow.
+
+If the above workflow fails to download the default Landsat 8 granule, check that
+it still exists in the s3://landsat-pds bucket and was not removed/replaced as a
+result of the collection 2 forward processing.
