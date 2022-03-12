@@ -560,6 +560,13 @@ workflows and their composite steps as K8s jobs.
    kubectl --namespace="$NAMESPACE_NAME" create -f k8s/VolumeClaims.yaml
    ```
 
+   If on AKS (Azure Kubernetes Service), see the AKS caveat below to create a
+   custom storage class that supports the `ReadWriteMany` mode and modifies
+   its mount options to work with the pod UID/GID. Then run this afterwards:
+   ```
+   kubectl --namespace="$NAMESPACE_NAME" create -f k8s/VolumeClaims.yaml
+   ```
+
    If on GKE (Google Kubernetes Engine), see the GKE caveat below to create an
    NFS server to support `ReadWriteMany` and run this afterwards:
    ```
@@ -636,35 +643,48 @@ workflows and their composite steps as K8s jobs.
 #### Azure Kubernetes Service
 
 The default storage class utilizes azure disk which doesn't support `ReadWriteMany` which is required by
-Calrissian. To change the default storage class to azure-file (which supports `ReadWriteMany`):
+Calrissian. The azurefile storage class supports `ReadWriteMany` however it specifies `uid: 0` and `gid: 0`
+which can give rise to permission issues in the pods spawned by Calrissian. Here we follow the instructions
+at https://docs.microsoft.com/en-us/azure/aks/azure-files-dynamic-pv to create this custom storage class
+and set it as the default storage class:
 
 ```
+$ kubectl --namespace="$NAMESPACE_NAME" create -f k8s/aks/azure-file-sc.yaml
 $ kubectl get storageclass
-NAME                PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
-azurefile           kubernetes.io/azure-file   Delete          Immediate              true                   106d
-azurefile-premium   kubernetes.io/azure-file   Delete          Immediate              true                   106d
-default (default)   kubernetes.io/azure-disk   Delete          WaitForFirstConsumer   true                   106d
-managed-premium     kubernetes.io/azure-disk   Delete          WaitForFirstConsumer   true                   106d
+NAME                     PROVISIONER          RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+azurefile                file.csi.azure.com   Delete          Immediate              true                   37m
+azurefile-csi            file.csi.azure.com   Delete          Immediate              true                   37m
+azurefile-csi-premium    file.csi.azure.com   Delete          Immediate              true                   37m
+azurefile-premium        file.csi.azure.com   Delete          Immediate              true                   37m
+default (default)        disk.csi.azure.com   Delete          WaitForFirstConsumer   true                   37m
+managed                  disk.csi.azure.com   Delete          WaitForFirstConsumer   true                   37m
+managed-csi              disk.csi.azure.com   Delete          WaitForFirstConsumer   true                   37m
+managed-csi-premium      disk.csi.azure.com   Delete          WaitForFirstConsumer   true                   37m
+managed-premium          disk.csi.azure.com   Delete          WaitForFirstConsumer   true                   37m
+my-azurefile             file.csi.azure.com   Delete          Immediate              false                  23m
 
-$ kubectl patch storageclass default -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+$ kubectl patch storageclass azurefile -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
 storageclass.storage.k8s.io/default patched
 
-$ kubectl get storageclass
-NAME                PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
-azurefile           kubernetes.io/azure-file   Delete          Immediate              true                   106d
-azurefile-premium   kubernetes.io/azure-file   Delete          Immediate              true                   106d
-default             kubernetes.io/azure-disk   Delete          WaitForFirstConsumer   true                   106d
-managed-premium     kubernetes.io/azure-disk   Delete          WaitForFirstConsumer   true                   106d
-
-$ kubectl patch storageclass azurefile -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-storageclass.storage.k8s.io/azurefile patched
+$ kubectl patch storageclass my-azurefile -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+storageclass.storage.k8s.io/my-azurefile patched
 
 $ kubectl get storageclass
-NAME                  PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
-azurefile (default)   kubernetes.io/azure-file   Delete          Immediate              true                   106d
-azurefile-premium     kubernetes.io/azure-file   Delete          Immediate              true                   106d
-default               kubernetes.io/azure-disk   Delete          WaitForFirstConsumer   true                   106d
-managed-premium       kubernetes.io/azure-disk   Delete          WaitForFirstConsumer   true                   106d
+NAME                     PROVISIONER          RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+azurefile                file.csi.azure.com   Delete          Immediate              true                   40m
+azurefile-csi            file.csi.azure.com   Delete          Immediate              true                   40m
+azurefile-csi-premium    file.csi.azure.com   Delete          Immediate              true                   40m
+azurefile-premium        file.csi.azure.com   Delete          Immediate              true                   40m
+default                  disk.csi.azure.com   Delete          WaitForFirstConsumer   true                   40m
+managed                  disk.csi.azure.com   Delete          WaitForFirstConsumer   true                   40m
+managed-csi              disk.csi.azure.com   Delete          WaitForFirstConsumer   true                   40m
+managed-csi-premium      disk.csi.azure.com   Delete          WaitForFirstConsumer   true                   40m
+managed-premium          disk.csi.azure.com   Delete          WaitForFirstConsumer   true                   40m
+my-azurefile (default)   file.csi.azure.com   Delete          Immediate              false                  25m
+```
+After this, continue with step 5 above:
+```
+kubectl --namespace="$NAMESPACE_NAME" create -f k8s/VolumeClaims.yaml
 ```
 
 #### Google Kubernetes Engine
