@@ -37,7 +37,8 @@ baseCommand: [sh]
 arguments:
 - -c
 - if [ ! -d $HOME/.aws ]; then cp -rp .aws $HOME/; fi &&
-  aws s3 cp --recursive $(inputs.dataset_dir.path) $(inputs.base_dataset_url)/$(inputs.dataset_dir.basename)
+  aws s3 cp --recursive $(inputs.dataset_dir.path) $(inputs.base_dataset_url)/$(inputs.dataset_dir.basename) &&
+  sleep infinity
 
 inputs:
   aws_access_key_id: string
