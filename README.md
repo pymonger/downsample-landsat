@@ -62,7 +62,7 @@ repo2docker --user-id 1000 --user-name jovyan \
        --cidfile=/private/tmp/docker_tmpw5t0r2ia/20220316071941-947315.cid \
        --env=TMPDIR=/tmp \
        --env=HOME=/aVKurX \
-       pymonger/downsample-landsat:2.0.0 \
+       pymonger/downsample-landsat:2.0.3 \
        /bin/sh \
        -c \
        papermill /home/jovyan/downsample-landsat/stage_in.ipynb output_nb.ipynb --parameters input_url "https://github.com/pymonger/downsample-landsat/releases/download/1.0.0/LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF"
@@ -135,7 +135,7 @@ Building off of the previous stage-in example:
        --cidfile=/private/tmp/docker_tmphmisivqs/20220316072201-265958.cid \
        --env=TMPDIR=/tmp \
        --env=HOME=/kfDhmD \
-       pymonger/downsample-landsat:2.0.0 \
+       pymonger/downsample-landsat:2.0.3 \
        /bin/sh \
        -c \
        papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF" --parameters min_spin_time "20" --parameters max_spin_time "40"
@@ -338,7 +338,7 @@ DAG workflow.
        --cidfile=/private/tmp/docker_tmp0nskcqmr/20220316072813-213104.cid \
        --env=TMPDIR=/tmp \
        --env=HOME=/CCnvFQ \
-       pymonger/downsample-landsat:2.0.0 \
+       pymonger/downsample-landsat:2.0.3 \
        /bin/sh \
        -c \
        papermill /home/jovyan/downsample-landsat/stage_in.ipynb output_nb.ipynb --parameters input_url "https://github.com/pymonger/downsample-landsat/releases/download/1.0.0/LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF"
@@ -369,7 +369,7 @@ DAG workflow.
        --cidfile=/private/tmp/docker_tmpflfj1gkn/20220316072819-607421.cid \
        --env=TMPDIR=/tmp \
        --env=HOME=/CCnvFQ \
-       pymonger/downsample-landsat:2.0.0 \
+       pymonger/downsample-landsat:2.0.3 \
        /bin/sh \
        -c \
        papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF" --parameters min_spin_time "15" --parameters max_spin_time "30"
