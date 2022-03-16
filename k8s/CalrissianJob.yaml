@@ -32,7 +32,7 @@ spec:
           - "/calrissian/output-data/docker-usage.json"
           - "https://raw.githubusercontent.com/pymonger/downsample-landsat/main/workflow.cwl"
           - "--workflow_input_url"
-          - "https://s3-us-west-2.amazonaws.com/landsat-pds/c1/L8/065/045/LC08_L1TP_065045_20210714_20210721_01_T1/LC08_L1TP_065045_20210714_20210721_01_T1_BQA.TIF"
+          - "https://github.com/pymonger/downsample-landsat/releases/download/1.0.0/LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF"
           - "--workflow_min_spin_time"
           - "15"
           - "--workflow_max_spin_time"
@@ -44,9 +44,6 @@ spec:
           - "--workflow_base_dataset_url"
           - "s3://hysds-dataset-bucket-gman-test/docker_on_desktop_k8s"
         volumeMounts:
-        - mountPath: /calrissian/input-data
-          name: calrissian-input-data
-          readOnly: true
         - mountPath: /calrissian/tmpout
           name: calrissian-tmpout
         - mountPath: /calrissian/output-data
@@ -58,10 +55,6 @@ spec:
               fieldPath: metadata.name
       restartPolicy: Never
       volumes:
-      - name: calrissian-input-data
-        persistentVolumeClaim:
-          claimName: calrissian-input-data
-          readOnly: true
       - name: calrissian-tmpout
         persistentVolumeClaim:
           claimName: calrissian-tmpout
