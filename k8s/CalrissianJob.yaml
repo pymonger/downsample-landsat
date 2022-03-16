@@ -44,9 +44,6 @@ spec:
           - "--workflow_base_dataset_url"
           - "s3://hysds-dataset-bucket-gman-test/docker_on_desktop_k8s"
         volumeMounts:
-        - mountPath: /calrissian/input-data
-          name: calrissian-input-data
-          readOnly: true
         - mountPath: /calrissian/tmpout
           name: calrissian-tmpout
         - mountPath: /calrissian/output-data
@@ -58,10 +55,6 @@ spec:
               fieldPath: metadata.name
       restartPolicy: Never
       volumes:
-      - name: calrissian-input-data
-        persistentVolumeClaim:
-          claimName: calrissian-input-data
-          readOnly: true
       - name: calrissian-tmpout
         persistentVolumeClaim:
           claimName: calrissian-tmpout
