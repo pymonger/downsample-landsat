@@ -65,7 +65,7 @@ repo2docker --user-id 1000 --user-name jovyan \
        pymonger/downsample-landsat:2.0.3 \
        /bin/sh \
        -c \
-       papermill /home/jovyan/downsample-landsat/stage_in.ipynb output_nb.ipynb --parameters input_url "https://github.com/pymonger/downsample-landsat/releases/download/1.0.0/LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF"
+       papermill /home/jovyan/downsample-landsat/stage_in.ipynb output_nb.ipynb --parameters input_url "https://github.com/pymonger/downsample-landsat/releases/download/1.0.0/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF"
    Input Notebook:  /home/jovyan/downsample-landsat/stage_in.ipynb
    Output Notebook: output_nb.ipynb
    Generating grammar tables from /srv/conda/envs/notebook/lib/python3.7/site-packages/blib2to3/Grammar.txt
@@ -80,12 +80,12 @@ repo2docker --user-id 1000 --user-name jovyan \
    INFO [job stage_in.cwl] completed success
    {
        "image_file": {
-           "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF",
-           "basename": "LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF",
+           "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF",
+           "basename": "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF",
            "class": "File",
            "checksum": "sha1$04fdac42fb1affef29ef1d986c5c1d4112edf1d6",
            "size": 2454136,
-           "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF"
+           "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF"
        },
        "output_nb_file": {
            "location": "file:///Users/pymonger/dev/downsample-landsat/output_nb.ipynb",
@@ -98,20 +98,20 @@ repo2docker --user-id 1000 --user-name jovyan \
    }
    INFO Final process status is success
    ```
-1. Verify that the `LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF` image file was created:
+1. Verify that the `LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF` image file was created:
    ```
-   ls -ltr LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF
+   ls -ltr LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF
    ```
 
    Output should look similar to this:
    ``` 
-   -rw-r--r--  1 pymonger  wheel  2454136 Mar 16 07:19 LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF
+   -rw-r--r--  1 pymonger  wheel  2454136 Mar 16 07:19 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF
    ```
-   You can visualize the `LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF` file in QGIS.
+   You can visualize the `LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF` file in QGIS.
 
 ### Run downsample-landsat example
 Building off of the previous stage-in example:
-1. Ensure that the `LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF` image file exists.
+1. Ensure that the `LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF` image file exists.
    If not, run the `stage-in` example above.
 1. Run cwltool (to run singularity instead of docker, add `--singularity` option):
    ```
@@ -128,7 +128,7 @@ Building off of the previous stage-in example:
        -i \
        --mount=type=bind,source=/private/tmp/docker_tmpchxpnnbm,target=/kfDhmD \
        --mount=type=bind,source=/private/tmp/docker_tmpxdhpp8w4,target=/tmp \
-       --mount=type=bind,source=/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF,target=/kfDhmD/LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF,readonly \
+       --mount=type=bind,source=/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF,target=/kfDhmD/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF,readonly \
        --workdir=/kfDhmD \
        --net=none \
        --rm \
@@ -138,7 +138,7 @@ Building off of the previous stage-in example:
        pymonger/downsample-landsat:2.0.3 \
        /bin/sh \
        -c \
-       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF" --parameters min_spin_time "20" --parameters max_spin_time "40"
+       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF" --parameters min_spin_time "20" --parameters max_spin_time "40"
    Input Notebook:  /home/jovyan/downsample-landsat/downsample_landsat.ipynb
    Output Notebook: output_nb.ipynb
    Generating grammar tables from /srv/conda/envs/notebook/lib/python3.7/site-packages/blib2to3/Grammar.txt
@@ -153,36 +153,36 @@ Building off of the previous stage-in example:
    INFO [job downsample_landsat.cwl] completed success
    {
        "dataset_dir": {
-           "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled",
-           "basename": "LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled",
+           "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled",
+           "basename": "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled",
            "class": "Directory",
            "listing": [
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png",
-                   "basename": "LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png",
+                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png",
+                   "basename": "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png",
                    "checksum": "sha1$1a61fa484cd51240f4cf26598eccd928475ee45c",
                    "size": 37187,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png"
+                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png"
                },
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json",
-                   "basename": "LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json",
+                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json",
+                   "basename": "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json",
                    "checksum": "sha1$44b316a811bfcd38a1148f0445c199f1b673fb12",
                    "size": 3229,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json"
+                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json"
                },
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF",
-                   "basename": "LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF",
+                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF",
+                   "basename": "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF",
                    "checksum": "sha1$fcf67dac89fa0e660040f40e20ff51e8af4922a4",
                    "size": 20577,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF"
+                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF"
                }
            ],
-           "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled"
+           "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled"
        },
        "output_nb_file": {
            "location": "file:///Users/pymonger/dev/downsample-landsat/output_nb.ipynb",
@@ -195,24 +195,24 @@ Building off of the previous stage-in example:
    }
    INFO Final process status is success
    ```
-1. Verify that the `LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled` dataset directory was created:
+1. Verify that the `LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled` dataset directory was created:
    ```
-   ls -ltr LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/
+   ls -ltr LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/
    ```
 
    Output should look similar to this:
    ``` 
    total 136
-   -rw-r--r--  1 pymonger  wheel  20577 Mar 16 07:22 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF
-   -rw-r--r--  1 pymonger  wheel  37187 Mar 16 07:22 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png
-   -rw-r--r--  1 pymonger  wheel   3229 Mar 16 07:22 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json
+   -rw-r--r--  1 pymonger  wheel  20577 Mar 16 07:22 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF
+   -rw-r--r--  1 pymonger  wheel  37187 Mar 16 07:22 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png
+   -rw-r--r--  1 pymonger  wheel   3229 Mar 16 07:22 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json
    ```
-   You can visualize the `LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF` file in QGIS.
+   You can visualize the `LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF` file in QGIS.
 
 ### Run stage-out example
 
 Building off of the previous dowsample-landsat example:
-1. Ensure that the `LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled` dataset directory exists.
+1. Ensure that the `LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled` dataset directory exists.
    If not, run the `downsample-landsat` example above.
 1. Copy the `stage_out-inputs.yml.tmpl` file to `stage_out-inputs.yml`:
    ```
@@ -248,7 +248,7 @@ Building off of the previous dowsample-landsat example:
        -i \
        --mount=type=bind,source=/private/tmp/docker_tmpho5gwdv_,target=/cdZWtz \
        --mount=type=bind,source=/private/tmp/docker_tmplzc1mhtb,target=/tmp \
-       --mount=type=bind,source=/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled,target=/var/lib/cwl/stg7f446d64-29d1-4990-ab5c-37a7c81bacd6/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled,readonly \
+       --mount=type=bind,source=/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled,target=/var/lib/cwl/stg7f446d64-29d1-4990-ab5c-37a7c81bacd6/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled,readonly \
        --workdir=/cdZWtz \
        --read-only=true \
        --user=503:20 \
@@ -259,16 +259,16 @@ Building off of the previous dowsample-landsat example:
        pymonger/aws-cli \
        sh \
        -c \
-       'if [ ! -d $HOME/.aws ]; then cp -rp .aws $HOME/; fi && aws s3 cp --recursive /var/lib/cwl/stg7f446d64-29d1-4990-ab5c-37a7c81bacd6/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled'
-   upload: ../var/lib/cwl/stg7f446d64-29d1-4990-ab5c-37a7c81bacd6/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json to s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json
-   upload: ../var/lib/cwl/stg7f446d64-29d1-4990-ab5c-37a7c81bacd6/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF to s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF
-   upload: ../var/lib/cwl/stg7f446d64-29d1-4990-ab5c-37a7c81bacd6/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png to s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png
+       'if [ ! -d $HOME/.aws ]; then cp -rp .aws $HOME/; fi && aws s3 cp --recursive /var/lib/cwl/stg7f446d64-29d1-4990-ab5c-37a7c81bacd6/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled'
+   upload: ../var/lib/cwl/stg7f446d64-29d1-4990-ab5c-37a7c81bacd6/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json to s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json
+   upload: ../var/lib/cwl/stg7f446d64-29d1-4990-ab5c-37a7c81bacd6/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF to s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF
+   upload: ../var/lib/cwl/stg7f446d64-29d1-4990-ab5c-37a7c81bacd6/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png to s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png
    INFO [job stage_out.cwl] Max memory used: 684MiB
    INFO [job stage_out.cwl] completed success
    {}
    INFO Final process status is success
    ```
-1. Verify that the`LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled` dataset directory was staged to the 
+1. Verify that the`LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled` dataset directory was staged to the 
    S3 bucket location.
    ```
    aws s3 ls $(grep base_dataset_url stage_out-inputs.yml | awk '{print $2}')/$(grep path stage_out-inputs.yml | awk '{print $2}')/
@@ -276,9 +276,9 @@ Building off of the previous dowsample-landsat example:
 
    Output should look similar to this:
    ```
-   2022-03-16 07:25:17      20577 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF
-   2022-03-16 07:25:17      37187 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png
-   2022-03-16 07:25:17       3229 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json
+   2022-03-16 07:25:17      20577 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF
+   2022-03-16 07:25:17      37187 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png
+   2022-03-16 07:25:17       3229 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json
    ```
 
 ### Run 3-step workflow (stage-in, downsample-landsat & stage-out) example
@@ -290,7 +290,7 @@ DAG workflow.
 
 1. Clean out any artifacts that were left as a result of running the previous examples:
    ```
-   rm -rf LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled *-stderr.txt *-stdout.txt output_nb.ipynb
+   rm -rf LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled *-stderr.txt *-stdout.txt output_nb.ipynb
    ```
 1. Copy the `workflow-inputs.yml.tmpl` file to `workflow-inputs.yml`:
    ```
@@ -341,7 +341,7 @@ DAG workflow.
        pymonger/downsample-landsat:2.0.3 \
        /bin/sh \
        -c \
-       papermill /home/jovyan/downsample-landsat/stage_in.ipynb output_nb.ipynb --parameters input_url "https://github.com/pymonger/downsample-landsat/releases/download/1.0.0/LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF"
+       papermill /home/jovyan/downsample-landsat/stage_in.ipynb output_nb.ipynb --parameters input_url "https://github.com/pymonger/downsample-landsat/releases/download/1.0.0/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF"
    Input Notebook:  /home/jovyan/downsample-landsat/stage_in.ipynb
    Output Notebook: output_nb.ipynb
    Generating grammar tables from /srv/conda/envs/notebook/lib/python3.7/site-packages/blib2to3/Grammar.txt
@@ -362,7 +362,7 @@ DAG workflow.
        -i \
        --mount=type=bind,source=/private/tmp/docker_tmp5mbytoqg,target=/CCnvFQ \
        --mount=type=bind,source=/private/tmp/docker_tmprmjz3b6i,target=/tmp \
-       --mount=type=bind,source=/private/tmp/docker_tmpwnlnw4ma/LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF,target=/CCnvFQ/LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF,readonly \
+       --mount=type=bind,source=/private/tmp/docker_tmpwnlnw4ma/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF,target=/CCnvFQ/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF,readonly \
        --workdir=/CCnvFQ \
        --net=none \
        --rm \
@@ -372,7 +372,7 @@ DAG workflow.
        pymonger/downsample-landsat:2.0.3 \
        /bin/sh \
        -c \
-       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF" --parameters min_spin_time "15" --parameters max_spin_time "30"
+       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF" --parameters min_spin_time "15" --parameters max_spin_time "30"
    Input Notebook:  /home/jovyan/downsample-landsat/downsample_landsat.ipynb
    Output Notebook: output_nb.ipynb
    Generating grammar tables from /srv/conda/envs/notebook/lib/python3.7/site-packages/blib2to3/Grammar.txt
@@ -393,7 +393,7 @@ DAG workflow.
        -i \
        --mount=type=bind,source=/private/tmp/docker_tmpomyfyxc3,target=/CCnvFQ \
        --mount=type=bind,source=/private/tmp/docker_tmpvhgcumoo,target=/tmp \
-       --mount=type=bind,source=/private/tmp/docker_tmp5mbytoqg/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled,target=/var/lib/cwl/stg26824e32-b21e-4f8c-9908-ecda262df49b/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled,readonly \
+       --mount=type=bind,source=/private/tmp/docker_tmp5mbytoqg/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled,target=/var/lib/cwl/stg26824e32-b21e-4f8c-9908-ecda262df49b/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled,readonly \
        --workdir=/CCnvFQ \
        --rm \
        --cidfile=/private/tmp/docker_tmp5eb_pxs9/20220316072842-378321.cid \
@@ -402,61 +402,61 @@ DAG workflow.
        pymonger/aws-cli \
        sh \
        -c \
-       'if [ ! -d $HOME/.aws ]; then cp -rp .aws $HOME/; fi && aws s3 cp --recursive /var/lib/cwl/stg26824e32-b21e-4f8c-9908-ecda262df49b/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled'
-   upload: ../var/lib/cwl/stg26824e32-b21e-4f8c-9908-ecda262df49b/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json to s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json
-   upload: ../var/lib/cwl/stg26824e32-b21e-4f8c-9908-ecda262df49b/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF to s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF
-   upload: ../var/lib/cwl/stg26824e32-b21e-4f8c-9908-ecda262df49b/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png to s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png
+       'if [ ! -d $HOME/.aws ]; then cp -rp .aws $HOME/; fi && aws s3 cp --recursive /var/lib/cwl/stg26824e32-b21e-4f8c-9908-ecda262df49b/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled'
+   upload: ../var/lib/cwl/stg26824e32-b21e-4f8c-9908-ecda262df49b/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json to s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json
+   upload: ../var/lib/cwl/stg26824e32-b21e-4f8c-9908-ecda262df49b/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF to s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF
+   upload: ../var/lib/cwl/stg26824e32-b21e-4f8c-9908-ecda262df49b/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png to s3://hysds-dataset-bucket-gman-test/test/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png
    INFO [job stage_out] Max memory used: 403MiB
    INFO [job stage_out] completed success
    INFO [step stage_out] completed success
    INFO [workflow ] completed success
    {
        "final_dataset_dir": {
-           "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled",
-           "basename": "LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled",
+           "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled",
+           "basename": "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled",
            "class": "Directory",
            "listing": [
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png",
-                   "basename": "LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png",
+                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png",
+                   "basename": "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png",
                    "checksum": "sha1$fb0d96740ec6f89741ff94f66f2555f93e7236ff",
                    "size": 37187,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png"
+                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png"
                },
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json",
-                   "basename": "LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json",
+                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json",
+                   "basename": "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json",
                    "checksum": "sha1$44b316a811bfcd38a1148f0445c199f1b673fb12",
                    "size": 3229,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json"
+                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json"
                },
                {
                    "class": "File",
-                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF",
-                   "basename": "LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF",
+                   "location": "file:///Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF",
+                   "basename": "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF",
                    "checksum": "sha1$fcf67dac89fa0e660040f40e20ff51e8af4922a4",
                    "size": 20577,
-                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF"
+                   "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF"
                }
            ],
-           "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled"
+           "path": "/Users/pymonger/dev/downsample-landsat/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled"
        }
    }
    INFO Final process status is success
    ```
-1. Verify that the `LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled` dataset directory exists locally:
+1. Verify that the `LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled` dataset directory exists locally:
    ```
-   ls -ltr LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/
+   ls -ltr LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/
    ```
 
    Output should look similar to this:
    ```
    total 136
-   -rw-r--r--  1 pymonger  wheel  20577 Mar 16 07:28 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF
-   -rw-r--r--  1 pymonger  wheel  37187 Mar 16 07:28 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png
-   -rw-r--r--  1 pymonger  wheel   3229 Mar 16 07:28 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json
+   -rw-r--r--  1 pymonger  wheel  20577 Mar 16 07:28 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF
+   -rw-r--r--  1 pymonger  wheel  37187 Mar 16 07:28 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png
+   -rw-r--r--  1 pymonger  wheel   3229 Mar 16 07:28 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json
    ```
 
    and was staged to the S3 bucket location:
@@ -466,9 +466,9 @@ DAG workflow.
 
    Output should look similar to this:
    ```
-   2022-03-16 07:28:45      20577 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF
-   2022-03-16 07:28:45      37187 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png
-   2022-03-16 07:28:45       3229 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json
+   2022-03-16 07:28:45      20577 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF
+   2022-03-16 07:28:45      37187 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png
+   2022-03-16 07:28:45       3229 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json
    ```
 
 ## Running calrissian
@@ -487,7 +487,7 @@ workflows and their composite steps as K8s jobs.
 
 1. Clean out any artifacts that were left as a result of running the previous examples:
    ```
-   rm -rf LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled *-stderr.txt *-stdout.txt output_nb.ipynb
+   rm -rf LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled *-stderr.txt *-stdout.txt output_nb.ipynb
    ```
 1. Create namespace and roles:
    ```
@@ -571,17 +571,17 @@ workflows and their composite steps as K8s jobs.
    ```
    kubectl --namespace="$NAMESPACE_NAME" cp access-pv:/calrissian/output-data output-data
    ```
-1. Verify that the`LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled` dataset directory exists in the output-data directory:
+1. Verify that the`LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled` dataset directory exists in the output-data directory:
    ```
-   ls -ltr output-data/LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled/
+   ls -ltr output-data/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled/
    ```
 
    Output should look similar to this:
    ```
    total 136
-   -rw-r--r--  1 pymonger  staff   3229 Mar 16 07:34 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json
-   -rw-r--r--  1 pymonger  staff  37187 Mar 16 07:34 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png
-   -rw-r--r--  1 pymonger  staff  20577 Mar 16 07:34 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF
+   -rw-r--r--  1 pymonger  staff   3229 Mar 16 07:34 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json
+   -rw-r--r--  1 pymonger  staff  37187 Mar 16 07:34 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png
+   -rw-r--r--  1 pymonger  staff  20577 Mar 16 07:34 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF
    ```
 
    and was staged to the S3 bucket location:
@@ -591,9 +591,9 @@ workflows and their composite steps as K8s jobs.
 
    Output should look similar to this:
    ```
-   2022-03-16 07:28:45      20577 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.TIF
-   2022-03-16 07:28:45      37187 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.browse.png
-   2022-03-16 07:28:45       3229 LC08_L1TP_065016_20130724_20170309_01_T1_BQA_downsampled.met.json
+   2022-03-16 07:28:45      20577 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.TIF
+   2022-03-16 07:28:45      37187 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.browse.png
+   2022-03-16 07:28:45       3229 LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL_downsampled.met.json
    ```
 
 ### K8s Caveats
@@ -713,7 +713,7 @@ NOTE: Due to the variability of data availability in the s3://landsat-pds bucket
 the workflows above use a granule that has been attached as an asset to the 1.0.0
 release:
 
-https://github.com/pymonger/downsample-landsat/releases/download/1.0.0/LC08_L1TP_065016_20130724_20170309_01_T1_BQA.TIF
+https://github.com/pymonger/downsample-landsat/releases/download/1.0.0/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF
 
 This will ensure that future runs of this workflow will not be broken by the
 changes to the s3://landsat-pds bucket.
