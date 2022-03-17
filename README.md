@@ -473,7 +473,7 @@ DAG workflow.
 
 ## Running calrissian
 
-### Run 3-step workflow (stage-in, downsample-landsat & stage-out) example on K8s (Kubernetes) via Calrissian
+### Run 3-step workflow (stage-in, downsample-landsat & stage-out) example on Kubernetes via Calrissian
 Now that we've seen the execution of the workflow on a local machine, it's time to execute the
 workflow on a K8s cluster. Once again the following image depicts the graph visualiation (dot) 
 of the DAG workflow.
@@ -481,7 +481,7 @@ of the DAG workflow.
 ![workflow](images/workflow.png?raw=true "workflow")
 
 In the previous section, we used `cwltool` to execute the CWL workflow which proceeded to
-spawn 2 containers corresponding to the 2 steps in the workflow. In this example, we submit
+spawn 3 containers corresponding to the 3 steps in the workflow. In this example, we submit
 a K8s job to run Calrissian, a CWL-compliant implementation that supports execution of
 workflows and their composite steps as K8s jobs.
 
