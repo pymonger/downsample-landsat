@@ -62,7 +62,7 @@ repo2docker --user-id 1000 --user-name jovyan \
        --cidfile=/private/tmp/docker_tmpw5t0r2ia/20220316071941-947315.cid \
        --env=TMPDIR=/tmp \
        --env=HOME=/aVKurX \
-       pymonger/downsample-landsat:2.0.3 \
+       pymonger/downsample-landsat:3.0.0 \
        /bin/sh \
        -c \
        papermill /home/jovyan/downsample-landsat/stage_in.ipynb output_nb.ipynb --parameters input_url "https://github.com/pymonger/downsample-landsat/releases/download/1.0.0/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF"
@@ -135,10 +135,10 @@ Building off of the previous stage-in example:
        --cidfile=/private/tmp/docker_tmphmisivqs/20220316072201-265958.cid \
        --env=TMPDIR=/tmp \
        --env=HOME=/kfDhmD \
-       pymonger/downsample-landsat:2.0.3 \
+       pymonger/downsample-landsat:3.0.0 \
        /bin/sh \
        -c \
-       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF" --parameters min_spin_time "20" --parameters max_spin_time "40"
+       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF" --parameters min_stress_time "20" --parameters max_stress_time "40"
    Input Notebook:  /home/jovyan/downsample-landsat/downsample_landsat.ipynb
    Output Notebook: output_nb.ipynb
    Generating grammar tables from /srv/conda/envs/notebook/lib/python3.7/site-packages/blib2to3/Grammar.txt
@@ -338,7 +338,7 @@ DAG workflow.
        --cidfile=/private/tmp/docker_tmp0nskcqmr/20220316072813-213104.cid \
        --env=TMPDIR=/tmp \
        --env=HOME=/CCnvFQ \
-       pymonger/downsample-landsat:2.0.3 \
+       pymonger/downsample-landsat:3.0.0 \
        /bin/sh \
        -c \
        papermill /home/jovyan/downsample-landsat/stage_in.ipynb output_nb.ipynb --parameters input_url "https://github.com/pymonger/downsample-landsat/releases/download/1.0.0/LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF"
@@ -369,10 +369,10 @@ DAG workflow.
        --cidfile=/private/tmp/docker_tmpflfj1gkn/20220316072819-607421.cid \
        --env=TMPDIR=/tmp \
        --env=HOME=/CCnvFQ \
-       pymonger/downsample-landsat:2.0.3 \
+       pymonger/downsample-landsat:3.0.0 \
        /bin/sh \
        -c \
-       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF" --parameters min_spin_time "15" --parameters max_spin_time "30"
+       papermill /home/jovyan/downsample-landsat/downsample_landsat.ipynb output_nb.ipynb --parameters input_file "LC08_L1TP_065045_20211205_20211215_02_T1_QA_PIXEL.TIF" --parameters min_stress_time "15" --parameters max_stress_time "30"
    Input Notebook:  /home/jovyan/downsample-landsat/downsample_landsat.ipynb
    Output Notebook: output_nb.ipynb
    Generating grammar tables from /srv/conda/envs/notebook/lib/python3.7/site-packages/blib2to3/Grammar.txt

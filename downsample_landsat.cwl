@@ -4,7 +4,7 @@ cwlVersion: v1.1
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: 'pymonger/downsample-landsat:2.0.3'
+    dockerPull: 'pymonger/downsample-landsat:3.0.0'
 baseCommand:
   - papermill
   - /home/jovyan/downsample-landsat/downsample_landsat.ipynb
@@ -24,22 +24,22 @@ inputs:
       prefix: '--parameters'
       valueFrom: |
         input_file "$(self.basename)"
-  min_spin_time:
+  min_stress_time:
     type: int
     inputBinding:
       position: 2
       shellQuote: false
       prefix: '--parameters'
       valueFrom: |
-        min_spin_time "$(self)"
-  max_spin_time:
+        min_stress_time "$(self)"
+  max_stress_time:
     type: int
     inputBinding:
       position: 3
       shellQuote: false
       prefix: '--parameters'
       valueFrom: |
-        max_spin_time "$(self)"
+        max_stress_time "$(self)"
 
 outputs:
   output_nb_file:
