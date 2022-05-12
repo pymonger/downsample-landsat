@@ -6,7 +6,7 @@
             "owsContext": {
                 "offering": {
                     "content": {
-                        "href": "https://raw.githubusercontent.com/pymonger/downsample-landsat/3.0.0/workflow.cwl"
+                        "href": "https://raw.githubusercontent.com/pymonger/downsample-landsat/test-stress/workflow.cwl"
                     }
                 }
             },
@@ -46,6 +46,6 @@
     },
     "immediateDeployment": true,
     "executionUnit": [{
-        "href": "docker://pymonger/downsample-landsat:3.0.0"
+        "href": "docker://pymonger/downsample-landsat:test-stress"
     }]
 }

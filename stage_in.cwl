@@ -4,7 +4,7 @@ cwlVersion: v1.1
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: 'pymonger/downsample-landsat:3.0.0'
+    dockerPull: 'pymonger/downsample-landsat:test-stress'
 baseCommand:
   - papermill
   - /home/jovyan/downsample-landsat/stage_in.ipynb
