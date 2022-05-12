@@ -14,6 +14,9 @@ requirements:
   InitialWorkDirRequirement:
     listing: 
       - $(inputs.input_file)
+  ResourceRequirement:
+    coresMin: 4
+    ramMin: 6144
 
 inputs:
   input_file:
