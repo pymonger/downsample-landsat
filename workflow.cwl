@@ -12,8 +12,8 @@ hints:
 
 inputs:
   workflow_input_url: string
-  workflow_min_spin_time: int
-  workflow_max_spin_time: int
+  workflow_min_stress_time: int
+  workflow_max_stress_time: int
   workflow_aws_access_key_id: string
   workflow_aws_secret_access_key: string
   workflow_base_dataset_url: string
@@ -51,8 +51,8 @@ steps:
     run: downsample_landsat.cwl
     in:
       input_file: stage_in/image_file
-      min_spin_time: workflow_min_spin_time
-      max_spin_time: workflow_max_spin_time
+      min_stress_time: workflow_min_stress_time
+      max_stress_time: workflow_max_stress_time
     out:
       - output_nb_file
       - dataset_dir
