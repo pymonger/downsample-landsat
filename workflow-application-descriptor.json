@@ -6,7 +6,7 @@
             "owsContext": {
                 "offering": {
                     "content": {
-                        "href": "https://raw.githubusercontent.com/pymonger/downsample-landsat/2.0.3/workflow.cwl"
+                        "href": "https://raw.githubusercontent.com/pymonger/downsample-landsat/3.0.0/workflow.cwl"
                     }
                 }
             },
@@ -36,7 +36,7 @@
                 }
             }]
         },
-        "processVersion": "2.0.3",
+        "processVersion": "3.0.0",
         "jobControlOptions": [
             "async-execute"
         ],
@@ -46,6 +46,6 @@
     },
     "immediateDeployment": true,
     "executionUnit": [{
-        "href": "docker://pymonger/downsample-landsat:2.0.3"
+        "href": "docker://pymonger/downsample-landsat:3.0.0"
     }]
 }
